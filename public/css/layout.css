@@ -1,0 +1,19 @@
+html {
+  border: 5px solid black;
+  background: url("/images/storm_trooper2.jpg") no-repeat top center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  min-width: 700px;
+}
+body {
+  color: white;
+  margin: auto;
+  text-align: center;
+}
+.head {
+  padding: 1px;
+  opacity: .6;
+  color: darkgrey;
+  background-color: black;
+}
