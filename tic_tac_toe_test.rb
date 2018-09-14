@@ -9,7 +9,8 @@ class Tic_tac_toe_test < Minitest::Test
 		assert_equal(9, Board.new.board.count)
 	end
 	def test_that_can_use_board_in
-		
-		assert_equal(Array, Sequential_class.new)
+		move = [0, 1, "X", "O", 4, 5, 6, 7, 8]
+		assert_equal(Array, Board.new(move).class)
 	end
+
 end	
