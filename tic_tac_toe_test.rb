@@ -12,5 +12,4 @@ class Tic_tac_toe_test < Minitest::Test
 		move = [0, 1, "X", "O", 4, 5, 6, 7, 8]
 		assert_equal(Array, Board.new(move).class)
 	end
-
 end	

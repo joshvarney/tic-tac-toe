@@ -10,110 +10,97 @@ class Board
 				counter += 1
 			end
 		end	
+			@board_array = @board
 			game_board << @board
 			@board = @board[0..58]	 
 	end 
 	def game_board
-		output2 = @board
-	  	output = ""
-	    output2.each_with_index do |cell, index|
-	    	output << " #{output2[index]} "
+	  	grid = ""
+	    @board.each_with_index do |cell, index|
+	    	grid << " #{@board[index]} "
 	      	case index % 3
-	      		when 0, 1 then output << "|"
-	      		when 2 then output << "\n-----------\n" unless cell == 8
+	      		when 0, 1 then grid << "|"
+	      		when 2 then grid << "\n-----------\n" unless cell == 8
 	    	end
 	  	end
-	  	@board = output
+	  	@board = grid
 	end
-	attr_reader :board
+	attr_reader :board_array
+	attr_reader :board	
 end	
 
-# things = Board.new([0, 1, "X", "O", 4, 5, 6, 7, 8])
-# p things.board
-# puts things.board
-# puts "Enter number position for your move:"
-# player_move = gets.chomp
-# system "cls"
-# player_move
-player_turn = "X"
-player_move = 4
-board_array = [0, 1, "X", "O", 4, 5, 6, 7, 8]
 
 class Two_player
-	# attr_reader :board
-	def initialize(player_turn, player_move, board_array)
-		@turn = player_turn
-		@move = player_move
-		@new_board = board_array
-		@new_board = update_board
-		# things = Board.new([0, 1, "X", "O", 4, 5, 6, 7, 8])
-		things = Board.new(update_board)
-		p things.board
-		puts things.board
-		puts "Enter number position for your move:"
-		@player_move = gets.chomp
+	def initialize
+		start_board = nil
+		stuff = Board.new(start_board)
+		game_board = stuff.board
+		@game_array = stuff.board_array
+		puts " "
+		puts game_board
+		puts " "
+		puts "Player 1 enter the number of the space you want to take:"
+		move = gets.chomp.to_i
 		system "cls"
-		p "done"
+		update_board(move)
 	end
-	attr_accessor :turn
-	attr_accessor :move
-	attr_accessor :new_board
-	def update_board
-		counter = 0
-		p @new_board.include?(@move)
-		if @new_board.include?(@move) == true
-			@new_board.each do |cell|
-				p cell
-				p @move
-				if cell == @move
-					@new_board[counter] = @turn
-				end
+	def update_board(move)
+		p1 = "X"
+		p2 = "O"
+		player = " "
+		wrong_space = " "
+		count = 0
+		moves = move
+		until count == 9
+			counter = 0 	
+			if @game_array.include?(moves) == true
+				wrong_space = " "
+				@game_array.each do |cell|
+					if cell == moves
+						if count.even? == true
+							@game_array[counter] = p1
+							count += 1
+						else
+							@game_array[counter] = p2
+							count += 1
+						end
+					end
 				counter += 1
+				end	
+			else
+				wrong_space = "Try Again"	
 			end
-		else
-			puts "Try Again"	
-		end	
-		@new_board			
+			if count.even? == true
+				player = "Player 1"
+			else
+				player = "Player 2"
+			end
+			puts count			 		
+			new_board = Board.new(@game_array)
+			puts " "
+			puts new_board.board
+			puts "#{wrong_space}"
+			puts "#{player} enter the number of the space you want to take:"	
+			moves = gets.chomp.to_i
+			system "cls"
+		end
+		puts "Tie"					
 	end
-	attr_reader :new_board
 end
-# other_stuff = Two_player.new(player_turn, player_move, board_array)
-# p other_stuff.new_board
+class The_game
+	def initialize
+		puts "Select game type; 1 = PVP, 2 = Easy CPU, 3 = Medium CPU, 4 = Hard CPU"
+		game_type = gets.chomp.to_i
+		game_type
+		system "cls"
+			case game_type
+				when game_type = 1
+					Two_player.new
+			end				
+	end
+end	
+The_game.new
 
 
 
 
-
-# class The_game
-# 	initialize(game_type)
-# 	@type = game_type
-# 		case @type
-# 			when @type == "PVP"
-# 				Two_player.new
-		
-
-
-
-
-
-# class Sequential_class
-# 	def initialize
-#	end
-# end
-# class Random_class
-# 	def initialize
-# 	end
-# end
-# class Unbeatable_class
-# 	def initialize
-# 	end
-# end
-
-# class Player_choice
-# 	def initialize
-# 	end
-# end
-# class The_game
-#	def initialize
-#	end
-# end	
