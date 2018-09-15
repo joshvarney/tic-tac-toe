@@ -91,6 +91,7 @@ class Two_player
 						break
 					else	
 						puts "#{player} enter the number of the space you want to take:"	
+						puts " "
 						moves = gets.chomp.to_i
 						system "cls"
 					end	
@@ -129,12 +130,6 @@ class Two_player
 					 		
 		end
 		unless tie == " "
-		new_board = Board.new(@game_array)	
-		puts " "
-		puts "Varney's TTT"
-		puts " "
-		puts new_board.board
-		puts "#{wrong_space}"
 		puts "#{tie}"
 		puts " "
 		end					
@@ -142,7 +137,12 @@ class Two_player
 end
 class The_game
 	def initialize
+		system "cls"
+		puts " "
+		puts "Varney's TTT"
+		puts " "
 		puts "Select game type; 1 = PVP, 2 = Easy CPU, 3 = Medium CPU, 4 = Hard CPU"
+		puts " "
 		game_type = gets.chomp.to_i
 		game_type
 		system "cls"
