@@ -1,13 +1,3 @@
-# things = Board.new([0, 1, "X", "O", 4, 5, 6, 7, 8])
-# p things.board
-# puts things.board
-# puts "Enter number position for your move:"
-# player_move = gets.chomp
-# system "cls"
-# player_move
-
-
-
 # class Sequential_class
 # 	def initialize
 #	end
@@ -21,24 +11,43 @@
 # 	end
 # end
 
-# class Player_choice
-# 	def initialize
-# 	end
-# end
-# class The_game
-#	def initialize
-#	end
-# end	
+[
+	0, 1, 2, 
+	3, 4, 5, 
+	6, 7, 8
+]
 
+["X", "X", "X", 3, 4, 5, 6, 7, 8]
+["O", "O", "O", 3, 4, 5, 6, 7, 8]
 
+[0, 1, 2, "X", "X", "X", 6, 7, 8]
+[0, 1, 2, "O", "O", "O", 6, 7, 8]
 
-# if move.class == Array 
-# 			@board = move
-# 		elsif	
-# 			@board = Array.new(9)
-# 			counter = 0
-# 			@board.each do |cell|
-# 				@board[counter] = counter
-# 				counter += 1
-# 			end
-# 		end	
+[0, 1, 2, 3, 4, 5, "X", "X", "X"]
+[0, 1, 2, 3, 4, 5, "O", "O", "O"]
+
+["X", 1, 2, "X", 4, 5, "X", 7, 8]
+["O", 1, 2, "O", 4, 5, "O", 7, 8]
+
+0 3 6
+
+[0, "X", 2, 3, "X", 5, 6, "X", 8]
+[0, "O", 2, 3, "O", 5, 6, "O", 8]
+
+1 4 7
+
+[0, 1, "X", 3, 4, "X", 6, 7, "X"]
+[0, 1, "O", 3, 4, "O", 6, 7, "O"]
+
+2 5 8
+
+["X", 1, 2, 3, "X", 5, 6, 7, "X"]
+["X", 1, 2, 3, "O", 5, 6, 7, "O"]
+
+0 4 8
+
+[0, 1, "X", 3, "X", 5, "X", 7, 8]
+[0, 1, "O", 3, "O", 5, "O", 7, 8]
+
+2 4 6
+  
