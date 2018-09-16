@@ -92,7 +92,11 @@ class Two_player
 					else	
 						puts "#{player} enter the number of the space you want to take:"	
 						puts " "
-						moves = gets.chomp.to_i
+						moves = gets.chomp
+						unless ("0".."8").include?(moves)
+							moves = 9
+						end
+						moves = moves.to_i	
 						system "cls"
 					end	
 				when 10 then
@@ -106,7 +110,6 @@ class Two_player
 					tie = " "
 					break
 				end
-
 			if @game_array.include?(moves) == true
 				wrong_space = " "
 				@game_array.each do |cell|
@@ -122,12 +125,10 @@ class Two_player
 						end
 					end
 				counter += 1
-
 				end	
 			else
 				wrong_space = "Try Again"	
-			end
-					 		
+			end					 		
 		end
 		unless tie == " "
 		puts "#{tie}"
@@ -135,25 +136,51 @@ class Two_player
 		end					
 	end
 end
-class The_game
+class Easy_cpu
 	def initialize
+		start_board = nil
+		stuff = Board.new(start_board)
+		game_board = stuff.board
+		@game_array = stuff.board_array
+		update_board
+	end
+	def update_board
+
+	end
+end	
+
+
+
+
+
+class The_game
+	def initialize		
 		system "cls"
 		puts " "
 		puts "Varney's TTT"
 		puts " "
 		puts "Select game type; 1 = PVP, 2 = Easy CPU, 3 = Medium CPU, 4 = Hard CPU"
 		puts " "
-		game_type = gets.chomp.to_i
-		game_type
-		system "cls"
+		game_type = gets.chomp
+		unless ("1".."4").include?(game_type)
+			game_type = 0
+		end
+		game_type = game_type.to_i
+		if game_type < 1
+			The_game.new
+		else	
+			system "cls"
 			case game_type
 				when game_type = 1
 					Two_player.new
+				when game_type = 2
+					Easy_cpu.new	
+				when game_type = 3
+					Medium_cpu.new
+				when game_type = 4
+					Hard_cpu.new
 			end				
+		end	
 	end
 end	
 The_game.new
-
-
-
-
