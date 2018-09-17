@@ -110,7 +110,7 @@
 # 		end
 # 	end	
 # end
-class Medium_cpu
+# class Medium_cpu
 # 	def initialize
 # 		start_board = nil
 # 		stuff = Board.new(start_board)
@@ -223,7 +223,7 @@ class Medium_cpu
 # 		end
 # 	end	
 # end
-class Hard_cpu
+# class Hard_cpu
 # 	def initialize
 # 		start_board = nil
 # 		stuff = Board.new(start_board)
@@ -396,6 +396,7 @@ class Hard_cpu
 # things = stuff.shuffle
 # p stuff 
 # p things
-
-
-
+corners = [0, 2, 6, 8]
+side_middle = [1, 3, 5, 7]
+p [0, 1, 2, 3, 4, 5, 6, 7, 8].join.include?(corners.join)
+p ["X", 1, 2, 3, "O", 5, 6, 7, "O"].include?("O")

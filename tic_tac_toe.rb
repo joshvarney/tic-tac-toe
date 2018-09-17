@@ -148,6 +148,8 @@ class One_player
 	end
 	def pick_marker
 		puts " "
+		puts "Varney's TTT"
+		puts " "
 		puts "Select X or O (X Goes First):"
 		puts " "
 		@marker = gets.chomp.upcase
@@ -289,15 +291,99 @@ end
 class Hard_cpu
 	def initialize(game_array)
 		@game_array = game_array
+		@corners = [0, 2, 6, 8]
+		@side_middle = [1, 3, 5, 7]
+		@open_sides = open_side
+		@open_corners = open_corner
+		@turn = count_integer
 		@move = cpu_move
 	end
+	def count_integer
+		counter = 0
+		p @open_spaces = []
+		@game_array.each do |cell|
+			if cell.class == String
+				counter += 1
+			else 
+				@open_spaces << cell
+			end
+		end
+		p @open_spaces
+		counter
+	end
+	def open_corner
+		@open_corners = []
+		@game_array.each do |cell|
+			if @corners.include?(cell)
+				@open_corners << cell
+			end
+		end		 
+	end
+	def open_side
+		@open_sides = []
+		@game_array.each do |cell|
+			if @side_middle.include?(cell)
+				@open_sides << cell
+			end
+		end
+	end			
 	def cpu_move
-	
+		case @turn
+		when 0
+			return @corners.shuffle.last.to_s
+		when 1
+			if @game_array.include?(4) && @open_corners.count == 4				
+				return @corners.shuffle.last.to_s
+			elsif @game_array.include?(4) && @open_corners.count < 4
+				return 4.to_s
+			elsif @game_array.include?(4) == false
+				return @corners.shuffle.last.to_s		
+			end
+		when 2
+			if @game_array.include?(4) == false
+				if @open_corners.include?(0) == false
+					return 8.to_s
+				elsif @open_corners.include?(6) == false
+					return 2.to_s
+				elsif @open_corners.include?(8) == false
+					return 0.to_s
+				elsif @open_corners.include?(2) == false
+					return 6.to_s
+				end
+			elsif @game_array.include?(4) && @open_corners.count == 3 
+				if @open_corners.include?(6) == false
+					return 2.to_s
+				elsif @open_corners.include?(8) == false
+					return 0.to_s
+				elsif @open_corners.include?(2) == false
+					return 6.to_s
+				elsif @open_corners.include?(0) == false
+					return 8.to_s	
+				end
+			elsif @open_corners.count == 2
+				return @open_corners.shuffle.last.to_s		
+																
+			end
+		when 3 #cpu O move
+
+			
+		when 4 #cpu X move
+			if @game_array.include?(4) == false
+				if @open_corners.count == 2
+
+			end	
+		when 5 #cpu O move
+		
+
+		when 6 #cpu X move
 
 
+		when 7 #cpu O move
 
 
-	
+		when 8
+			return @open_corners[0].to_s
+		end	 	
 	end
 	attr_reader :move
 end		
@@ -328,14 +414,14 @@ class The_game
 					skill = 2
 					One_player.new(skill)
 				when 4
-					puts " "
-					puts "Varney's TTT"
-					puts " "
-					puts "Unbeatable Under Construction"
-					sleep(2)
-					The_game.new
-					# skill = 3
-					# One_player.new(skill)
+					# puts " "
+					# puts "Varney's TTT"
+					# puts " "
+					# puts "Unbeatable Under Construction"
+					# sleep(2)
+					# The_game.new
+					skill = 3
+					One_player.new(skill)
 			end				
 		end	
 	end
