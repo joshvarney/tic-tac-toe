@@ -131,19 +131,20 @@ class Two_player
 			end					 		
 		end
 		unless tie == " "
-		puts "#{tie}"
-		puts " "
+			puts "#{tie}"
+			puts " "
 		end					
 	end
 end
-class Easy_cpu
-	def initialize
+class One_player
+	def initialize(skill)
+		@skill = skill
 		start_board = nil
 		stuff = Board.new(start_board)
 		game_board = stuff.board
 		@game_array = stuff.board_array
 		@marker = pick_marker
-		easy_board
+		one_board
 	end
 	def pick_marker
 		puts " "
@@ -152,11 +153,11 @@ class Easy_cpu
 		@marker = gets.chomp.upcase
 		system "cls"
 		unless ["X", "O"].include?(@marker)
-			Easy_cpu.new
+			One_player.new(@skill)
 		end
 		@marker	
 	end	
-	def easy_board
+	def one_board
 		@marker
 		p1 = "X"
 		p2 = "O"
@@ -187,13 +188,27 @@ class Easy_cpu
 							puts "Wait for CPU to make move:"
 							puts " "
 							puts " "
-							moves = cpu_move
+							case @skill
+								when 1
+									moves = Easy_cpu.new(@game_array).move
+								when 2
+									moves = Medium_cpu.new(@game_array).move
+								when 3
+									moves = Hard_cpu.new(@game_array).move	
+							end	
 							sleep(2)
 						elsif @marker == "O" && count.even?
 							puts "Wait for CPU to make move:"
 							puts " "
 							puts " "
-							moves = cpu_move
+							case @skill
+								when 1
+									moves = Easy_cpu.new(@game_array).move
+								when 2
+									moves = Medium_cpu.new(@game_array).move
+								when 3
+									moves = Hard_cpu.new(@game_array).move	
+							end	
 							sleep(2)
 						end			
 						unless ("0".."8").include?(moves)
@@ -235,10 +250,16 @@ class Easy_cpu
 			end					 		
 		end
 		unless tie == " "
-		puts "#{tie}"
-		puts " "
+			puts "#{tie}"
+			puts " "
 		end					
 	end
+end
+class Easy_cpu
+	def initialize(game_array)
+		@game_array = game_array
+		@move = cpu_move
+	end	
 	def cpu_move
 		@game_array.each do |cell|
 			if cell.class == Integer
@@ -246,110 +267,13 @@ class Easy_cpu
 				break
 			end				
 		end
-	end	
-end
-class Medium_cpu
-	def initialize
-		start_board = nil
-		stuff = Board.new(start_board)
-		game_board = stuff.board
-		@game_array = stuff.board_array
-		@marker = pick_marker
-		easy_board
 	end
-	def pick_marker
-		puts " "
-		puts "Select X or O (X Goes First):"
-		puts " "
-		@marker = gets.chomp.upcase
-		system "cls"
-		unless ["X", "O"].include?(@marker)
-			Medium_cpu.new
-		end
-		@marker	
-	end	
-	def easy_board
-		@marker
-		p1 = "X"
-		p2 = "O"
-		tie = "Its a Tie"
-		wrong_space = " "
-		count = 0
-		until count == 10	
-			new_board = Board.new(@game_array)
-			puts " "
-			puts "Varney's TTT"
-			puts " "
-			puts new_board.board
-			puts "#{wrong_space}"
-			case @game_array.count
-				when 9 then
-					if count == 9
-						break
-					else	
-						if @marker == "X" && count.even?	
-							puts "Your turn enter number of the space to place your #{@marker}:"	
-							puts " " 
-							moves = gets.chomp
-						elsif @marker == "O" && count.odd?
-							puts "Your turn enter number of the space to place your #{@marker}:"	
-							puts " " 
-							moves = gets.chomp
-						elsif @marker == "X" && count.odd?
-							puts "Wait for CPU to make move:"
-							puts " "
-							puts " "
-							moves = cpu_move
-							sleep(2)
-						elsif @marker == "O" && count.even?
-							puts "Wait for CPU to make move:"
-							puts " "
-							puts " "
-							moves = cpu_move
-							sleep(2)
-						end			
-						unless ("0".."8").include?(moves)
-							moves = 9
-						end
-						moves = moves.to_i	
-						system "cls"
-					end			
-				when 10 then
-					if @marker == "X"
-						winner = "You are"
-					else
-						winner = "The CPU is"
-					end		
-					puts "#{winner} the #{@game_array[9]}"
-					puts " "
-					tie = " "
-					break
-				end
-			if @game_array.include?(moves) == true
-				wrong_space = " "
-				counter = 0
-				@game_array.each do |cell|
-					if cell == moves
-						if count.even? == true
-							@game_array[counter] = p1
-							@game_array = Winning.new(@game_array).check_win
-							count += 1
-						else
-							@game_array[counter] = p2
-							@game_array = Winning.new(@game_array).check_win
-							count += 1
-						end
-					end
-				counter += 1
-				end	
-			else
-				wrong_space = "Try Again"	
-			end					 		
-		end
-		unless tie == " "
-		puts "#{tie}"
-		puts " "
-		end					
+	attr_reader :move
+end		
+class Medium_cpu
+	def initialize(game_array)
+		@game_array = game_array
+		@move = cpu_move
 	end
 	def cpu_move
 		array = @game_array.shuffle
@@ -359,115 +283,24 @@ class Medium_cpu
 				break
 			end				
 		end
-	end	
-end
-class Hard_cpu
-	def initialize
-		start_board = nil
-		stuff = Board.new(start_board)
-		game_board = stuff.board
-		@game_array = stuff.board_array
-		@marker = pick_marker
-		easy_board
 	end
-	def pick_marker
-		puts " "
-		puts "Select X or O (X Goes First):"
-		puts " "
-		@marker = gets.chomp.upcase
-		system "cls"
-		unless ["X", "O"].include?(@marker)
-			Hard_cpu.new
-		end
-		@marker	
-	end	
-	def easy_board
-		@marker
-		p1 = "X"
-		p2 = "O"
-		tie = "Its a Tie"
-		wrong_space = " "
-		count = 0
-		until count == 10	
-			new_board = Board.new(@game_array)
-			puts " "
-			puts "Varney's TTT"
-			puts " "
-			puts new_board.board
-			puts "#{wrong_space}"
-			case @game_array.count
-				when 9 then
-					if count == 9
-						break
-					else	
-						if @marker == "X" && count.even?	
-							puts "Your turn enter number of the space to place your #{@marker}:"	
-							puts " " 
-							moves = gets.chomp
-						elsif @marker == "O" && count.odd?
-							puts "Your turn enter number of the space to place your #{@marker}:"	
-							puts " " 
-							moves = gets.chomp
-						elsif @marker == "X" && count.odd?
-							puts "Wait for CPU to make move:"
-							puts " "
-							puts " "
-							moves = cpu_move
-							sleep(2)
-						elsif @marker == "O" && count.even?
-							puts "Wait for CPU to make move:"
-							puts " "
-							puts " "
-							moves = cpu_move
-							sleep(2)
-						end			
-						unless ("0".."8").include?(moves)
-							moves = 9
-						end
-						moves = moves.to_i	
-						system "cls"
-					end			
-				when 10 then
-					if @marker == "X"
-						winner = "You are"
-					else
-						winner = "The CPU is"
-					end		
-					puts "#{winner} the #{@game_array[9]}"
-					puts " "
-					tie = " "
-					break
-				end
-			if @game_array.include?(moves) == true
-				wrong_space = " "
-				counter = 0
-				@game_array.each do |cell|
-					if cell == moves
-						if count.even? == true
-							@game_array[counter] = p1
-							@game_array = Winning.new(@game_array).check_win
-							count += 1
-						else
-							@game_array[counter] = p2
-							@game_array = Winning.new(@game_array).check_win
-							count += 1
-						end
-					end
-				counter += 1
-				end	
-			else
-				wrong_space = "Try Again"	
-			end					 		
-		end
-		unless tie == " "
-		puts "#{tie}"
-		puts " "
-		end					
+	attr_reader :move
+end		
+class Hard_cpu
+	def initialize(game_array)
+		@game_array = game_array
+		@move = cpu_move
 	end
 	def cpu_move
-		@game_array
-	end	
-end				
+	
+
+
+
+
+	
+	end
+	attr_reader :move
+end		
 class The_game
 	def initialize		
 		system "cls"
@@ -486,20 +319,23 @@ class The_game
 		else	
 			system "cls"
 			case game_type
-				when game_type = 1
+				when 1
 					Two_player.new
-				when game_type = 2
-					Easy_cpu.new	
-				when game_type = 3
-					Medium_cpu.new
-				when game_type = 4
+				when 2
+					skill = 1
+					One_player.new(skill)	
+				when 3
+					skill = 2
+					One_player.new(skill)
+				when 4
 					puts " "
 					puts "Varney's TTT"
 					puts " "
 					puts "Unbeatable Under Construction"
 					sleep(2)
 					The_game.new
-					# Hard_cpu.new
+					# skill = 3
+					# One_player.new(skill)
 			end				
 		end	
 	end
