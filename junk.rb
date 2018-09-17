@@ -46,21 +46,23 @@
 
 # 0 4 8
 
-# [0, 1, "X", 3, "X", 5, "X", 7, 8]
+# stuff = [0, 1, "X", 3, "X", 5, "X", 7, 8]
 # [0, 1, "O", 3, "O", 5, "O", 7, 8]
 
 # 2 4 6
 #  
 
-# p ("0".."8").include?("8")
+# p ["X", "O"].include?("O")
 
-comt = 0
-while (comt < 10)
-    sleep(3)
-    comt = comt +1
-    puts comt
-end#while
-
+# comt = 0
+# while (comt < 10)
+#     sleep(3)
+#     comt = comt +1
+#     puts comt
+# end#while
+# things = stuff.shuffle
+# p stuff 
+# p things
 
 
 
