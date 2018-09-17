@@ -220,10 +220,14 @@ class One_player
 						system "cls"
 					end			
 				when 10 then
-					if @marker == "X"
+					if @marker == "O" && count.even?
 						winner = "You are"
-					else
+					elsif @marker == "O" && count.odd?
 						winner = "The computer is"
+					elsif @marker == "X" && count.even?
+						winner = "The computer is"
+					elsif @marker == "X" && count.odd?
+						winner = "You are"	
 					end		
 					puts "#{winner} the #{@game_array[9]}"
 					puts " "
@@ -300,7 +304,7 @@ class Hard_cpu
 	end
 	def count_integer
 		counter = 0
-		p @open_spaces = []
+		@open_spaces = []
 		@game_array.each do |cell|
 			if cell.class == String
 				counter += 1
@@ -317,7 +321,8 @@ class Hard_cpu
 			if @corners.include?(cell)
 				@open_corners << cell
 			end
-		end		 
+		end
+		p @open_corners		 
 	end
 	def open_side
 		@open_sides = []
@@ -326,6 +331,7 @@ class Hard_cpu
 				@open_sides << cell
 			end
 		end
+		p @open_sides
 	end			
 	def cpu_move
 		case @turn
@@ -368,21 +374,47 @@ class Hard_cpu
 
 			
 		when 4 #cpu X move
-			if @game_array.include?(4) == false
-				if @open_corners.count == 2
-
+			if @game_array.include?(4) && @open_corners.count == 0
+				if @game_array[0] == "X" && @game_array[2] == "X"
+					return 1.to_s
+				elsif @game_array[2] == "X" && @game_array[8] == "X"
+					return 5.to_s
+				elsif @game_array[8] == "X" && @game_array[6] == "X"
+					return 7.to_s
+				elsif @game_array[6] == "X" && @game_array[0] == "X"
+					return 3.to_s
+				end			 
+			elsif @game_array.include?(4) == false
+				if @open_corners.count == 1
+					return @open_corners[0].to_s
+				elsif @open_corners.count == 2
+					if @open_sides.include?(1) == false
+						return 7.to_s
+					elsif @open_sides.include?(3) == false
+						return 5.to_s
+					elsif @open_sides.include?(5) == false
+						return 3.to_s
+					elsif @open_sides.include?(7) == false
+						return 1.to_s
+					end
+				end						
+			elsif @game_array.include?(4) 
+				if @open_corners.count == 0
+					return 4.to_s 	
+				end		
 			end	
 		when 5 #cpu O move
 		
 
 		when 6 #cpu X move
 
+			return @open_spaces[0].to_s
 
 		when 7 #cpu O move
 
 
 		when 8
-			return @open_corners[0].to_s
+			return @open_spaces[0].to_s
 		end	 	
 	end
 	attr_reader :move
