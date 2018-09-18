@@ -23,12 +23,23 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_switches_markers_correctly
 	# 	assert_equal(true, Two_player.new.game_array.include?("O"))
 	# end
-	def test_that_returns_winner_with_three_in_a_row
-		assert_equal("Winner", Winning.new(["X", "X", "X", 3, 4, 5, 6, 7, 8]).check_win
-	end
+	# def test_that_returns_winner_with_three_in_a_row
+	# 	assert_equal("Winner", Winning.new(["X", "X", "X", 3, 4, 5, 6, 7, 8]).check_win
+	# end
 	# def test_that_winning_works
 	# 	w = ["X", "X", "X", 3, 4, 5, 6, 7, 8]
 	# 	assert_equal(["X", "X", "X", 3, 4, 5, 6, 7, 8, "Winner"], Winning.new(w))
 	# end
-	
+	# def test_that_easy_works_in_order
+	# 	assert_equal(["X", "X", "X", "O", "O", 5, 6, 7, 8, "The Computer is the Winner Top Row"], One_player.new(1).board_array)
+	# end
+	# def test_that_easy_work_when_o
+	# 	assert_equal(["O", "O", "O", "X", "X", 5, "X", 7, 8, "The Computer is the Winner Top Row"], One_player.new(1).board_array)
+	# end
+	# def test_that_medium_works_in_order
+	# 	refute_equal(["X", "X", "X", "O", "O", 5, 6, 7, 8, "The Computer is the Winner Top Row"], One_player.new(2).board_array)
+	# end
+	# def test_that_medium_works_when_o
+	# 	refute_equal(["O", "O", "O", "X", "X", 5, "X", 7, 8, "The Computer is the Winner Top Row"], One_player.new(2).board_array)
+	# end			
 end	
