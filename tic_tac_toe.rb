@@ -340,8 +340,7 @@ class Hard_cpu
 		p @open_sides
 	end
 	def terminal_board
-		terminal_combos = [[0, 1], [1, 2], [3, 4], [4, 5], [6, 7], [7, 8], [0, 3], [3, 6], [1, 4], [4, 7], [2, 5], [5, 8], [2, 4], [4, 6], [0, 4], [4, 8], [0, 2], [0, 6], [0, 8], [1, 7], [2, 8], [2, 6], [3, 5], [6, 8]]			
-		
+		@terminal_combos = [[0, 1, 2], [1, 2, 0], [3, 4, 5], [4, 5, 3], [6, 7, 8], [7, 8, 6], [0, 3, 6], [3, 6, 0], [1, 4, 7], [4, 7, 1], [2, 5, 8], [5, 8, 2], [2, 4, 6], [4, 6, 2], [0, 4, 8], [4, 8, 0], [0, 2, 1], [0, 6, 3], [0, 8, 4], [1, 7, 4], [2, 8, 5], [2, 6, 4], [3, 5, 4], [6, 8, 7]]
 	end
 	def cpu_move_x
 		case @turn
@@ -358,20 +357,78 @@ class Hard_cpu
 		end
 	end	
 	def cpu_move_o
+		@terminal_combos = terminal_board
 		case @turn
 			when 1
-				if @open_corners == 3 && @game_array.include?(4)
+				if  @game_array.include?(4)
 					return 4.to_s
 				else 
 					return @open_corners.shuffle.last.to_s
 				end	
 			when 3
-
-
+				@terminal_combos.each do |combo|
+					if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+					 	if @game_array[combo[0]] == "O" && @game_array[combo[1]] == "O" 
+					 		if @game_array.include?(combo[2])
+						 		return combo[2].to_s
+					 		end
+					 	end
+					end
+				end
+				@terminal_combos.each do |combo|
+					if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+					 	if @game_array[combo[0]] == @game_array[combo[1]] 
+					 		if @game_array.include?(combo[2])
+						 		return combo[2].to_s
+					 		end
+					 	end
+					end
+				end
+				if @open_corners.count == 2
+					return @open_sides.shuffle.last.to_s
+				else	
+					return @open_spaces.shuffle.last.to_s
+				end	
 			when 5
-
+				@terminal_combos.each do |combo|
+					if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+					 	if @game_array[combo[0]] == "O" && @game_array[combo[1]] == "O" 
+					 		if @game_array.include?(combo[2])
+						 		return combo[2].to_s
+					 		end
+					 	end
+					end
+				end
+				@terminal_combos.each do |combo|
+					if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+					 	if @game_array[combo[0]] == @game_array[combo[1]] 
+					 		if @game_array.include?(combo[2])
+						 		return combo[2].to_s
+					 		end
+					 	end
+					end
+				end
+				return @open_spaces.shuffle.last.to_s
 			when 7
-
+				@terminal_combos.each do |combo|
+					if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+					 	if @game_array[combo[0]] == "O" && @game_array[combo[1]] == "O" 
+					 		if @game_array.include?(combo[2])
+						 		return combo[2].to_s
+					 		end
+					 	end
+					end
+				end
+				@terminal_combos.each do |combo|
+					if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+					 	if @game_array[combo[0]] == @game_array[combo[1]] 
+					 		if @game_array.include?(combo[2])
+						 		return combo[2].to_s
+					 		end
+					 	end
+					end
+				end
+				return @open_spaces.shuffle.last.to_s
 		end		
 	end	
 	attr_reader :move
