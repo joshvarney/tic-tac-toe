@@ -292,133 +292,152 @@ class Medium_cpu
 	end
 	attr_reader :move
 end		
-class Hard_cpu
-	def initialize(game_array)
-		@game_array = game_array
-		@corners = [0, 2, 6, 8]
-		@side_middle = [1, 3, 5, 7]
-		@open_sides = open_side
-		@open_corners = open_corner
-		@turn = count_integer
-		@move = cpu_move
-	end
-	def count_integer
-		counter = 0
-		@open_spaces = []
-		@game_array.each do |cell|
-			if cell.class == String
-				counter += 1
-			else 
-				@open_spaces << cell
-			end
-		end
-		p @open_spaces
-		counter
-	end
-	def open_corner
-		@open_corners = []
-		@game_array.each do |cell|
-			if @corners.include?(cell)
-				@open_corners << cell
-			end
-		end
-		p @open_corners		 
-	end
-	def open_side
-		@open_sides = []
-		@game_array.each do |cell|
-			if @side_middle.include?(cell)
-				@open_sides << cell
-			end
-		end
-		p @open_sides
-	end			
-	def cpu_move
-		case @turn
-		when 0
-			return @corners.shuffle.last.to_s
-		when 1
-			if @game_array.include?(4) && @open_corners.count == 4				
-				return @corners.shuffle.last.to_s
-			elsif @game_array.include?(4) && @open_corners.count < 4
-				return 4.to_s
-			elsif @game_array.include?(4) == false
-				return @corners.shuffle.last.to_s		
-			end
-		when 2
-			if @game_array.include?(4) == false
-				if @open_corners.include?(0) == false
-					return 8.to_s
-				elsif @open_corners.include?(6) == false
-					return 2.to_s
-				elsif @open_corners.include?(8) == false
-					return 0.to_s
-				elsif @open_corners.include?(2) == false
-					return 6.to_s
-				end
-			elsif @game_array.include?(4) && @open_corners.count == 3 
-				if @open_corners.include?(6) == false
-					return 2.to_s
-				elsif @open_corners.include?(8) == false
-					return 0.to_s
-				elsif @open_corners.include?(2) == false
-					return 6.to_s
-				elsif @open_corners.include?(0) == false
-					return 8.to_s	
-				end
-			elsif @open_corners.count == 2
-				return @open_corners.shuffle.last.to_s		
+# class Hard_cpu
+# 	def initialize(game_array)
+# 		@game_array = game_array
+# 		@corners = [0, 2, 6, 8]
+# 		@side_middle = [1, 3, 5, 7]
+# 		@open_sides = open_side
+# 		@open_corners = open_corner
+# 		@turn = count_integer
+# 		@move = cpu_move
+# 	end
+# 	def count_integer
+# 		counter = 0
+# 		@open_spaces = []
+# 		@game_array.each do |cell|
+# 			if cell.class == String
+# 				counter += 1
+# 			else 
+# 				@open_spaces << cell
+# 			end
+# 		end
+# 		p @open_spaces
+# 		counter
+# 	end
+# 	def open_corner
+# 		@open_corners = []
+# 		@game_array.each do |cell|
+# 			if @corners.include?(cell)
+# 				@open_corners << cell
+# 			end
+# 		end
+# 		p @open_corners		 
+# 	end
+# 	def open_side
+# 		@open_sides = []
+# 		@game_array.each do |cell|
+# 			if @side_middle.include?(cell)
+# 				@open_sides << cell
+# 			end
+# 		end
+# 		p @open_sides
+# 	end			
+# 	def cpu_move
+# 		case @turn
+# 		when 0
+# 			return @corners.shuffle.last.to_s
+# 		when 1
+# 			if @game_array.include?(4) && @open_corners.count == 4				
+# 				return @corners.shuffle.last.to_s
+# 			elsif @game_array.include?(4) && @open_corners.count < 4
+# 				return 4.to_s
+# 			elsif @game_array.include?(4) == false
+# 				return @corners.shuffle.last.to_s		
+# 			end
+# 		when 2
+# 			if @game_array.include?(4) == false
+# 				if @open_corners.include?(0) == false
+# 					return 8.to_s
+# 				elsif @open_corners.include?(6) == false
+# 					return 2.to_s
+# 				elsif @open_corners.include?(8) == false
+# 					return 0.to_s
+# 				elsif @open_corners.include?(2) == false
+# 					return 6.to_s
+# 				end
+# 			elsif @game_array.include?(4) && @open_corners.count == 3 
+# 				if @open_corners.include?(6) == false
+# 					return 2.to_s
+# 				elsif @open_corners.include?(8) == false
+# 					return 0.to_s
+# 				elsif @open_corners.include?(2) == false
+# 					return 6.to_s
+# 				elsif @open_corners.include?(0) == false
+# 					return 8.to_s	
+# 				end
+# 			elsif @open_corners.count == 2
+# 				return @open_corners.shuffle.last.to_s		
 																
-			end
-		when 3 #cpu O move
+# 			end
+# 		when 3 #cpu O move
 
 			
-		when 4 #cpu X move
-			if @game_array.include?(4) && @open_corners.count == 0
-				if @game_array[0] == "X" && @game_array[2] == "X"
-					return 1.to_s
-				elsif @game_array[2] == "X" && @game_array[8] == "X"
-					return 5.to_s
-				elsif @game_array[8] == "X" && @game_array[6] == "X"
-					return 7.to_s
-				elsif @game_array[6] == "X" && @game_array[0] == "X"
-					return 3.to_s
-				end			 
-			elsif @game_array.include?(4) == false
-				if @open_corners.count == 1
-					return @open_corners[0].to_s
-				elsif @open_corners.count == 2
-					if @open_sides.include?(1) == false
-						return 7.to_s
-					elsif @open_sides.include?(3) == false
-						return 5.to_s
-					elsif @open_sides.include?(5) == false
-						return 3.to_s
-					elsif @open_sides.include?(7) == false
-						return 1.to_s
-					end
-				end						
-			elsif @game_array.include?(4) 
-				if @open_corners.count == 0
-					return 4.to_s 	
-				end		
-			end	
-		when 5 #cpu O move
+# 		when 4 #cpu X move
+# 			if @game_array.include?(4) && @open_corners.count == 0
+# 				if @game_array[0] == "X" && @game_array[2] == "X"
+# 					return 1.to_s
+# 				elsif @game_array[2] == "X" && @game_array[8] == "X"
+# 					return 5.to_s
+# 				elsif @game_array[8] == "X" && @game_array[6] == "X"
+# 					return 7.to_s
+# 				elsif @game_array[6] == "X" && @game_array[0] == "X"
+# 					return 3.to_s
+# 				end			 
+# 			elsif @game_array.include?(4) == false
+# 				if @open_corners.count == 1
+# 					if @open_corners.include?(0)
+# 						return 0.to_s
+# 					elsif @open_corners.include?(2)
+# 						return 2.to_s
+# 					elsif @open_corners.include?(6)
+# 						return 6.to_s
+# 					elsif @open_corners.include?(8)
+# 						return 8.to_s			
+# 					end	
+# 				elsif @open_corners.count == 2
+# 					if @open_sides.include?(1) == false
+# 						return 7.to_s
+# 					elsif @open_sides.include?(3) == false
+# 						return 5.to_s
+# 					elsif @open_sides.include?(5) == false
+# 						return 3.to_s
+# 					elsif @open_sides.include?(7) == false
+# 						return 1.to_s
+# 					end
+# 				end						
+# 			elsif @game_array.include?(4) 
+# 				if @open_corners.count == 0
+# 					return 4.to_s 	
+# 				end		
+# 			end	
+# 		when 5 #cpu O move
 		
 
-		when 6 #cpu X move
+# 		when 6 #cpu X move
+# 			if @open_corners.count == 2
+# 				if @game_array[6] == "X" && @game_array[3] == "X"
+# 					return 0.to_s
+# 				elsif @game_array[1] == "X" && @game_array[2] == "X"
+# 					return 0.to_s
+# 				elsif @game_array[2] == "X" && @game_array[5] == "X"
+# 					return 8.to_s
+# 				elsif @game_array[7] == "X" && @game_array[8] == "X"
+# 					return 6.to_s 
+# 				else 
+# 					@open_spaces[0].to_s
+# 				end				
+# 			end
 
-			return @open_spaces[0].to_s
-
-		when 7 #cpu O move
+# 		when 7 #cpu O move
 
 
-		when 8
-			return @open_spaces[0].to_s
-		end	 	
-	end
-	attr_reader :move
-end		
+# 		when 8
+# 			return @open_spaces[0].to_s
+# 		end	 	
+# 	end
+# 	attr_reader :move
+# end		
 class The_game
 	def initialize		
 		system "cls"
@@ -446,14 +465,14 @@ class The_game
 					skill = 2
 					One_player.new(skill)
 				when 4
-					# puts " "
-					# puts "Varney's TTT"
-					# puts " "
-					# puts "Unbeatable Under Construction"
-					# sleep(2)
-					# The_game.new
-					skill = 3
-					One_player.new(skill)
+					puts " "
+					puts "Varney's TTT"
+					puts " "
+					puts "Unbeatable Under Construction"
+					sleep(2)
+					The_game.new
+					# skill = 3
+					# One_player.new(skill)
 			end				
 		end	
 	end
