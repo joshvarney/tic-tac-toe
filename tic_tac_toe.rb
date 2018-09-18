@@ -338,7 +338,11 @@ class Hard_cpu
 			end
 		end
 		p @open_sides
-	end			
+	end
+	def terminal_board
+		terminal_combos = [[0, 1], [1, 2], [3, 4], [4, 5], [6, 7], [7, 8], [0, 3], [3, 6], [1, 4], [4, 7], [2, 5], [5, 8], [2, 4], [4, 6], [0, 4], [4, 8], [0, 2], [0, 6], [0, 8], [1, 7], [2, 8], [2, 6], [3, 5], [6, 8]]			
+		
+	end
 	def cpu_move_x
 		case @turn
 			when 0
@@ -356,12 +360,13 @@ class Hard_cpu
 	def cpu_move_o
 		case @turn
 			when 1
-				if @game_array.include?(4)
+				if @open_corners == 3 && @game_array.include?(4)
 					return 4.to_s
 				else 
 					return @open_corners.shuffle.last.to_s
 				end	
 			when 3
+
 
 			when 5
 
