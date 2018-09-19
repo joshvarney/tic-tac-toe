@@ -45,22 +45,25 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_hard_takes_the_middle_if_player_takes_corner
 	# 	assert_equal("O", One_player.new(3).game_array[4])
 	# end
-	def test_that_board_makes_new_array_if_nil
-		assert_equal(Array, Board.new(nil).board_array.class)
-	end
-	def test_that_contains_correct_amount_of_elements
-		assert_equal(9, Board.new(nil).board_array.count)
-	end	
-	def test_that_board_returns_grid_string
-		assert_equal(String, Board.new(nil).board.class)
-	end
-	def test_that_board_string_is_long_enough
-		assert_equal(59, Board.new(nil).board.split("").count)
-	end
-	def test_that_the_game_inits
-		assert_equal(The_game, The_game.new.class)
-	end
-	def test_that_the_game_takes_in_user_input
-		assert_equal("1", The_game.new.game_type)
-	end					
+	# def test_that_board_makes_new_array_if_nil
+	# 	assert_equal(Array, Board.new(nil).board_array.class)
+	# end
+	# def test_that_contains_correct_amount_of_elements
+	# 	assert_equal(9, Board.new(nil).board_array.count)
+	# end	
+	# def test_that_board_returns_grid_string
+	# 	assert_equal(String, Board.new(nil).board.class)
+	# end
+	# def test_that_board_string_is_long_enough
+	# 	assert_equal(59, Board.new(nil).board.split("").count)
+	# end
+	# def test_that_the_game_inits
+	# 	assert_equal(The_game, The_game.new.class)
+	# end
+	# def test_that_the_game_takes_in_user_input
+	# 	assert_equal("1", The_game.new.game_type)
+	# end
+	def test_that_cpu_skill_gets_passed_to_one_player_class
+		assert_equal(1, One_player.new(1).skill)
+	end						
 end	
