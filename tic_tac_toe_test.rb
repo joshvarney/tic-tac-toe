@@ -148,32 +148,33 @@ class Tic_tac_toe_test < Minitest::Test
 	# 	marker = "X"
 	# 	assert_equal(6, Hard_cpu.new(game_array, marker).turn.count)
 	# end	
-	def test_that_open_spaces_function_returns_correct
-		game_array = ["O", 1, 2, 3, 4, "X", 6, "X", 8]
-		marker = "X"
-		assert_equal(6, Hard_cpu.new(game_array, marker).open_spaces.count)
+	# def test_that_open_spaces_function_returns_correct
+	# 	game_array = ["O", 1, 2, 3, 4, "X", 6, "X", 8]
+	# 	marker = "X"
+	# 	assert_equal(6, Hard_cpu.new(game_array, marker).open_spaces.count)
 
-		game_array = [0, 1, "O", "X", 4, 5, 6, 7, 8]
-		marker = "X"
-		assert_equal(7, Hard_cpu.new(game_array, marker).open_spaces.count)
+	# 	game_array = [0, 1, "O", "X", 4, 5, 6, 7, 8]
+	# 	marker = "X"
+	# 	assert_equal(7, Hard_cpu.new(game_array, marker).open_spaces.count)
 
-		game_array = [0, 1, 2, "X", "O", "O", "X", "O", "X"]
+	# 	game_array = [0, 1, 2, "X", "O", "O", "X", "O", "X"]
+	# 	marker = "X"
+	# 	assert_equal(3, Hard_cpu.new(game_array, marker).open_spaces.count)
+	# end	
+	def test_that_cpu_marker_changes 
+		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+		marker = "O"
+		assert_equal("X", Hard_cpu.new(game_array, marker).cpu_marker)
+
+		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 		marker = "X"
-		assert_equal(3, Hard_cpu.new(game_array, marker).open_spaces.count)
+		assert_equal("O", Hard_cpu.new(game_array, marker).cpu_marker)
 	end	
 
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
+		# game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+		# marker = "X"
+		# assert_equal(, Hard_cpu.new(game_array, marker))
+	
 # 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 # 		marker = "X"
 # 		assert_equal(, Hard_cpu.new(game_array, marker))
