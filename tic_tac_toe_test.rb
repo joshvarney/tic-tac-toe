@@ -75,7 +75,10 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_upcases_marker
 	# 	assert_equal("X", One_player.new(1).marker)							
 	# end
-	def test_that_game_array_is_in_oneplayer
-		assert_equal(Array, One_player.new(1).game_array.class)
-	end		
+	# def test_that_game_array_is_in_oneplayer
+	# 	assert_equal(Array, One_player.new(1).game_array.class)
+	# end
+	# def test_that_easy_cpu_works_in_sequence
+	# 	assert_equal(String, Easy_cpu.new("X").move.class)
+	# end			
 end	
