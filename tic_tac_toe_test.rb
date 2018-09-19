@@ -135,30 +135,32 @@ class Tic_tac_toe_test < Minitest::Test
 	# 	marker = "O"
 	# 	assert_equal(4, Hard_cpu.new(game_array, marker).open_corners.count)
 	# end
-	def test_that_turn_returns_correct_number
-		game_array = [0, 1, 2, 3, 4, 5, 6, "X", 8]
-		marker = "X"
-		assert_equal(8, Hard_cpu.new(game_array, marker).turn.count)
+	# def test_that_turn_returns_correct_number
+	# 	game_array = [0, 1, 2, 3, 4, 5, 6, "X", 8]
+	# 	marker = "X"
+	# 	assert_equal(8, Hard_cpu.new(game_array, marker).turn.count)
 
-		game_array = ["X", 1, "O", 3, "X", 5, "O", 7, "X"]
-		marker = "X"
-		assert_equal(4, Hard_cpu.new(game_array, marker).turn.count)
+	# 	game_array = ["X", 1, "O", 3, "X", 5, "O", 7, "X"]
+	# 	marker = "X"
+	# 	assert_equal(4, Hard_cpu.new(game_array, marker).turn.count)
 
-		game_array = ["X", 1, "O", 3, 4, 5, "X", 7, 8]
+	# 	game_array = ["X", 1, "O", 3, 4, 5, "X", 7, 8]
+	# 	marker = "X"
+	# 	assert_equal(6, Hard_cpu.new(game_array, marker).turn.count)
+	# end	
+	def test_that_open_spaces_function_returns_correct
+		game_array = ["O", 1, 2, 3, 4, "X", 6, "X", 8]
 		marker = "X"
-		assert_equal(6, Hard_cpu.new(game_array, marker).turn.count)
+		assert_equal(6, Hard_cpu.new(game_array, marker).open_spaces.count)
+
+		game_array = [0, 1, "O", "X", 4, 5, 6, 7, 8]
+		marker = "X"
+		assert_equal(7, Hard_cpu.new(game_array, marker).open_spaces.count)
+
+		game_array = [0, 1, 2, "X", "O", "O", "X", "O", "X"]
+		marker = "X"
+		assert_equal(3, Hard_cpu.new(game_array, marker).open_spaces.count)
 	end	
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
 
 # 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 # 		marker = "X"
