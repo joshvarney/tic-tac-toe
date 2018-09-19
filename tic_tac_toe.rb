@@ -436,12 +436,6 @@ class The_game
 					skill = 2
 					One_player.new(skill)
 				when 4
-					# puts " "
-					# puts "Varney's TTT"
-					# puts " "
-					# puts "Unbeatable Under Construction"
-					# sleep(2)
-					# The_game.new
 					skill = 3
 					One_player.new(skill)
 			end				
