@@ -158,8 +158,8 @@ class One_player
 			One_player.new(@skill)
 		end
 		@marker	
-	end
-	attr_reader :marker	
+	end	
+	attr_reader :game_array
 	# def one_board
 	# 	@marker
 	# 	p1 = "X"

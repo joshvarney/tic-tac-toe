@@ -72,7 +72,10 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_will_not_take_anything_besides_x_o
 	# 	refute_equal("Y", One_player.new(1).marker)
 	# end
-	def test_that_upcases_marker
-		assert_equal("X", One_player.new(1).marker)							
-	end	
+	# def test_that_upcases_marker
+	# 	assert_equal("X", One_player.new(1).marker)							
+	# end
+	def test_that_game_array_is_in_oneplayer
+		assert_equal(Array, One_player.new(1).game_array.class)
+	end		
 end	
