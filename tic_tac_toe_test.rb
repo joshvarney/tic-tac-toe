@@ -66,7 +66,13 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_cpu_skill_gets_passed_to_one_player_class
 	# 	assert_equal(1, One_player.new(1).skill)
 	# end
-	def test_that_can_pick_x_or_o
-		assert_equal("X", One_player.new(1).marker)
-	end						
+	# def test_that_can_pick_x_or_o
+	# 	assert_equal("X", One_player.new(1).marker)
+	# end
+	# def test_that_will_not_take_anything_besides_x_o
+	# 	refute_equal("Y", One_player.new(1).marker)
+	# end
+	def test_that_upcases_marker
+		assert_equal("X", One_player.new(1).marker)							
+	end	
 end	
