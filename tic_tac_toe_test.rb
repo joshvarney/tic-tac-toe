@@ -59,5 +59,8 @@ class Tic_tac_toe_test < Minitest::Test
 	end
 	def test_that_the_game_inits
 		assert_equal(The_game, The_game.new.class)
-	end				
+	end
+	def test_that_the_game_takes_in_user_input
+		assert_equal("1", The_game.new.game_type)
+	end					
 end	

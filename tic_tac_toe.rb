@@ -417,7 +417,7 @@ class The_game
 		puts " "
 		puts "Select game type; 1 = PVP, 2 = Easy CPU, 3 = Medium CPU, 4 = Hard CPU"
 		puts " "
-		# game_type = gets.chomp
+		@game_type = gets.chomp
 		# unless ("1".."4").include?(game_type)
 		# 	game_type = 0
 		# end
@@ -441,5 +441,6 @@ class The_game
 		# 	end				
 		# end	
 	end
+	attr_reader :game_type
 end	
 The_game.new
