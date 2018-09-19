@@ -63,7 +63,10 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_the_game_takes_in_user_input
 	# 	assert_equal("1", The_game.new.game_type)
 	# end
-	def test_that_cpu_skill_gets_passed_to_one_player_class
-		assert_equal(1, One_player.new(1).skill)
+	# def test_that_cpu_skill_gets_passed_to_one_player_class
+	# 	assert_equal(1, One_player.new(1).skill)
+	# end
+	def test_that_can_pick_x_or_o
+		assert_equal("X", One_player.new(1).marker)
 	end						
 end	

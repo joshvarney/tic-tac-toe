@@ -143,24 +143,23 @@ class One_player
 		stuff = Board.new(start_board)
 		game_board = stuff.board
 		@game_array = stuff.board_array
-		# @marker = pick_marker
+		@marker = pick_marker
 		# one_board
 	end
-	attr_reader :skill
-	attr_reader :game_array
-	# def pick_marker
-	# 	puts " "
-	# 	puts "Varney's TTT"
-	# 	puts " "
-	# 	puts "Select X or O (X Goes First):"
-	# 	puts " "
-	# 	@marker = gets.chomp.upcase
-	# 	system "cls"
-	# 	unless ["X", "O"].include?(@marker)
-	# 		One_player.new(@skill)
-	# 	end
-	# 	@marker	
-	# end	
+	def pick_marker
+		puts " "
+		puts "Varney's TTT"
+		puts " "
+		puts "Select X or O (X Goes First):"
+		puts " "
+		@marker = gets.chomp.upcase
+		system "cls"
+		unless ["X", "O"].include?(@marker)
+			One_player.new(@skill)
+		end
+		@marker	
+	end
+	attr_reader :marker	
 	# def one_board
 	# 	@marker
 	# 	p1 = "X"
