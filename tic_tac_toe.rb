@@ -409,37 +409,37 @@ end
 # 	end	
 # 	attr_reader :move
 # end		
-# class The_game
-# 	def initialize		
-# 		system "cls"
-# 		puts " "
-# 		puts "Varney's TTT"
-# 		puts " "
-# 		puts "Select game type; 1 = PVP, 2 = Easy CPU, 3 = Medium CPU, 4 = Hard CPU"
-# 		puts " "
-# 		game_type = gets.chomp
-# 		unless ("1".."4").include?(game_type)
-# 			game_type = 0
-# 		end
-# 		game_type = game_type.to_i
-# 		if game_type < 1
-# 			The_game.new
-# 		else	
-# 			system "cls"
-# 			case game_type
-# 				when 1
-# 					Two_player.new
-# 				when 2
-# 					skill = 1
-# 					One_player.new(skill)	
-# 				when 3
-# 					skill = 2
-# 					One_player.new(skill)
-# 				when 4
-# 					skill = 3
-# 					One_player.new(skill)
-# 			end				
-# 		end	
-# 	end
-# end	
-# The_game.new
+class The_game
+	def initialize		
+		system "cls"
+		puts " "
+		puts "Varney's TTT"
+		puts " "
+		puts "Select game type; 1 = PVP, 2 = Easy CPU, 3 = Medium CPU, 4 = Hard CPU"
+		puts " "
+		# game_type = gets.chomp
+		# unless ("1".."4").include?(game_type)
+		# 	game_type = 0
+		# end
+		# game_type = game_type.to_i
+		# if game_type < 1
+		# 	The_game.new
+		# else	
+		# 	system "cls"
+		# 	case game_type
+		# 		when 1
+		# 			Two_player.new
+		# 		when 2
+		# 			skill = 1
+		# 			One_player.new(skill)	
+		# 		when 3
+		# 			skill = 2
+		# 			One_player.new(skill)
+		# 		when 4
+		# 			skill = 3
+		# 			One_player.new(skill)
+		# 	end				
+		# end	
+	end
+end	
+The_game.new
