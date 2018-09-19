@@ -84,29 +84,160 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_medium_cpu_shuffles_and_returns
 	# 	refute_equal(0, Medium_cpu.new("X").game_array[0])
 	# end
-	def test_that_winning_works
-		game_array = ["X", "X", "X", 3, 4, 5, 6, 7, 8]
-		assert_equal("Winner Top Row", Winning.new(game_array).check_win[9])
+	# def test_that_winning_works
+	# 	game_array = ["X", "X", "X", 3, 4, 5, 6, 7, 8]
+	# 	assert_equal("Winner Top Row", Winning.new(game_array).check_win[9])
 		
-		game_array = [0, 1, 2, "O", "O", "O", 6, 7, 8]
-		assert_equal("Winner Middle Row", Winning.new(game_array).check_win[9])
+	# 	game_array = [0, 1, 2, "O", "O", "O", 6, 7, 8]
+	# 	assert_equal("Winner Middle Row", Winning.new(game_array).check_win[9])
 		
-		game_array = [0, 1, 2, 3, 4, 5, "X", "X", "X"]
-		assert_equal("Winner Bottom Row", Winning.new(game_array).check_win[9])
+	# 	game_array = [0, 1, 2, 3, 4, 5, "X", "X", "X"]
+	# 	assert_equal("Winner Bottom Row", Winning.new(game_array).check_win[9])
 		
-		game_array = [0, 1, "O", 3, 4, "O", 6, 7, "O"]
-		assert_equal("Winner Right Column", Winning.new(game_array).check_win[9])
+	# 	game_array = [0, 1, "O", 3, 4, "O", 6, 7, "O"]
+	# 	assert_equal("Winner Right Column", Winning.new(game_array).check_win[9])
 		
-		game_array = ["X", 1, 2, "X", 4, 5, "X", 7, 8]
-		assert_equal("Winner Left Column", Winning.new(game_array).check_win[9])
+	# 	game_array = ["X", 1, 2, "X", 4, 5, "X", 7, 8]
+	# 	assert_equal("Winner Left Column", Winning.new(game_array).check_win[9])
 		
-		game_array = [0, 1, "X", 3, "X", 5, "X", 7, 8]
-		assert_equal("Winner Diagonal Right to Left", Winning.new(game_array).check_win[9])
+	# 	game_array = [0, 1, "X", 3, "X", 5, "X", 7, 8]
+	# 	assert_equal("Winner Diagonal Right to Left", Winning.new(game_array).check_win[9])
 	
-		game_array = [0, "O", 2, 3, "O", 5, 6, "O", 8]
-		assert_equal("Winner Middle Column", Winning.new(game_array).check_win[9])
+	# 	game_array = [0, "O", 2, 3, "O", 5, 6, "O", 8]
+	# 	assert_equal("Winner Middle Column", Winning.new(game_array).check_win[9])
 		
-		game_array = ["X", 1, 2, 3, "X", 5, 6, 7, "X"]
-		assert_equal("Winner Diagonal Left to Right", Winning.new(game_array).check_win[9])
-	end			
-end	
+	# 	game_array = ["X", 1, 2, 3, "X", 5, 6, 7, "X"]
+	# 	assert_equal("Winner Diagonal Left to Right", Winning.new(game_array).check_win[9])
+	# end
+	def test_that_hard_cpu_is_functioning
+		game_array = [0, "X", 2, 3, 4, 5, 6, 7, 8]
+		marker = "X"
+		assert_equal(3, Hard_cpu.new(game_array, marker).open_sides.count)
+
+		game_array = [0, 1, 2, "X", 4, 5, 6, "O", 8]
+		marker = "O"
+		assert_equal(2, Hard_cpu.new(game_array, marker).open_sides.count)
+
+		game_array = [0, "X", 2, "O", 4, "X", 6, "O", 8]
+		marker = "X"
+		assert_equal(0, Hard_cpu.new(game_array, marker).open_sides.count)
+	end
+	def test_that_open_corners_function_works
+		game_array = ["X", 1, 2, 3, 4, 5, 6, 7, 8]
+		marker = "O"
+		assert_equal(3, Hard_cpu.new(game_array, marker).open_corners.count)
+
+		game_array = [0, 1, 2, 3, 4, "X", "O", 7, "O"]
+		marker = "X"
+		assert_equal(2, Hard_cpu.new(game_array, marker).open_corners.count)
+
+		game_array = [0, "O", 2, 3, "X", 5, 6, "X", 8]
+		marker = "O"
+		assert_equal(4, Hard_cpu.new(game_array, marker).open_corners.count)
+	end
+		
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))
+
+# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+# 		marker = "X"
+# 		assert_equal(, Hard_cpu.new(game_array, marker))				
+# end	
+end
