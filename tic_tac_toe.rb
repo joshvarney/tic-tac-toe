@@ -307,8 +307,6 @@ class Hard_cpu
 		end	
 		@move = cpu_move		
 	end
-		attr_reader :open_sides
-		attr_reader :open_corners
 		attr_reader :turn
 		attr_reader :move
 		attr_reader :cpu_marker
