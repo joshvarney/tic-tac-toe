@@ -50,5 +50,8 @@ class Tic_tac_toe_test < Minitest::Test
 	end
 	def test_that_contains_correct_amount_of_elements
 		assert_equal(9, Board.new(nil).board_array.count)
-	end			
+	end	
+	def test_that_board_returns_grid_string
+		assert_equal(String, Board.new(nil).board.class)
+	end		
 end	
