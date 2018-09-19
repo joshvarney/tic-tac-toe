@@ -81,4 +81,7 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_easy_cpu_works_in_sequence
 	# 	assert_equal(String, Easy_cpu.new("X").move.class)
 	# end			
+	# def test_that_medium_cpu_shuffles_and_returns
+	# 	refute_equal(0, Medium_cpu.new("X").game_array[0])
+	# end	
 end	
