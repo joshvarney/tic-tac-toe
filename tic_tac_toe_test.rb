@@ -42,7 +42,13 @@ class Tic_tac_toe_test < Minitest::Test
 	# def test_that_medium_works_when_o
 	# 	refute_equal(["O", "O", "O", "X", "X", 5, "X", 7, 8, "The Computer is the Winner Top Row"], One_player.new(2).board_array)
 	# end
-	def test_that_hard_takes_the_middle_if_player_takes_corner
-		assert_equal("O", One_player.new(3).game_array[4])
+	# def test_that_hard_takes_the_middle_if_player_takes_corner
+	# 	assert_equal("O", One_player.new(3).game_array[4])
+	# end
+	def test_that_board_makes_new_array_if_nil
+		assert_equal(Array, Board.new(nil).board_array.class)
+	end
+	def test_that_contains_correct_amount_of_elements
+		assert_equal(9, Board.new(nil).board_array.count)
 	end			
 end	
