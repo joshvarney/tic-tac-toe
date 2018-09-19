@@ -138,15 +138,15 @@ class Tic_tac_toe_test < Minitest::Test
 	def test_that_turn_returns_correct_number
 		game_array = [0, 1, 2, 3, 4, 5, 6, "X", 8]
 		marker = "X"
-		assert_equal(1, Hard_cpu.new(game_array, marker).turn.count)
+		assert_equal(8, Hard_cpu.new(game_array, marker).turn.count)
 
 		game_array = ["X", 1, "O", 3, "X", 5, "O", 7, "X"]
 		marker = "X"
-		assert_equal(5, Hard_cpu.new(game_array, marker).turn.count)
+		assert_equal(4, Hard_cpu.new(game_array, marker).turn.count)
 
 		game_array = ["X", 1, "O", 3, 4, 5, "X", 7, 8]
 		marker = "X"
-		assert_equal(3, Hard_cpu.new(game_array, marker).turn.count)
+		assert_equal(6, Hard_cpu.new(game_array, marker).turn.count)
 	end	
 # 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 # 		marker = "X"
