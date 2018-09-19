@@ -53,5 +53,8 @@ class Tic_tac_toe_test < Minitest::Test
 	end	
 	def test_that_board_returns_grid_string
 		assert_equal(String, Board.new(nil).board.class)
-	end		
+	end
+	def test_that_board_string_is_long_enough
+		assert_equal(59, Board.new(nil).board.split("").count)
+	end			
 end	
