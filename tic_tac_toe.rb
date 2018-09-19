@@ -307,10 +307,7 @@ class Hard_cpu
 		end	
 		@move = cpu_move		
 	end
-		attr_reader :open_spaces
-		attr_reader :turn
 		attr_reader :move
-		attr_reader :cpu_marker
 	def count_integer
 		counter = 0
 		@open_spaces = []
