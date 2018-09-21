@@ -200,40 +200,40 @@ class Tic_tac_toe_test < Minitest::Test
 	# 	marker = "O"
 	# 	assert_equal("2", Hard_cpu.new(game_array, marker).move)
 	# end
-	def test_that_terminal_combos_works_for_blocking
-		game_array = ["X", 1, 2, 3, "O", 5, "X", 7, 8]
+	# def test_that_terminal_combos_works_for_blocking
+	# 	game_array = ["X", 1, 2, 3, "O", 5, "X", 7, 8]
+	# 	marker = "X"
+	# 	assert_equal("3", Hard_cpu.new(game_array, marker).move)
+
+	# 	game_array = [0, "O", "X", 3, "O", 5, 6, 7, 8]
+	# 	marker = "O"
+	# 	assert_equal("7", Hard_cpu.new(game_array, marker).move)
+
+	# 	game_array = [0, 1, "O", 3, "X", 5, 6, 7, "X"]
+	# 	marker = "X"
+	# 	assert_equal("0", Hard_cpu.new(game_array, marker).move)
+
+	# 	game_array = [0, 1, 2, 3, "X", 5, "O", "O", 8]
+	# 	marker = "X"
+	# 	assert_equal("8", Hard_cpu.new(game_array, marker).move)
+	# end
+	def test_that_terminal_combos_works_for_winning_moves
+		game_array = ["O", "O", 2, 3, "X", 5, "X", "X", 8]
 		marker = "X"
+		assert_equal("2", Hard_cpu.new(game_array, marker).move)
+
+		game_array = ["X", 1, "O", 3, "O", "O", "X", 7, 8]
+		marker = "O"
 		assert_equal("3", Hard_cpu.new(game_array, marker).move)
 
-		game_array = [0, "O", "X", 3, "O", 5, 6, 7, 8]
+		game_array = [0, 1, "O", 3, "O", 5, 6, "X", "X"]
+		marker = "X"
+		assert_equal("6", Hard_cpu.new(game_array, marker).move)
+
+		game_array = [0, "O", "X", 3, "O", 5, 6, 7, "X"]
 		marker = "O"
-		assert_equal("7", Hard_cpu.new(game_array, marker).move)
-
-		game_array = [0, 1, "O", 3, "X", 5, 6, 7, "X"]
-		marker = "X"
-		assert_equal("0", Hard_cpu.new(game_array, marker).move)
-
-		game_array = [0, 1, 2, 3, "X", 5, "O", "O", 8]
-		marker = "X"
-		assert_equal("8", Hard_cpu.new(game_array, marker).move)
+		assert_equal("5", Hard_cpu.new(game_array, marker).move)
 	end
-	# def test_that_terminal_combos_works_for_winning_moves
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-	# end
 	# def test_that_starting_moves_works_for_x_and_o
 # 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 # 		marker = "X"
