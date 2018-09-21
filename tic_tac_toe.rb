@@ -11,8 +11,7 @@ class Board
 			end
 		end	
 			@board_array = @board
-			game_board << @board
-			@board = @board[0..58]	 
+			@board = game_board	 
 	end 
 	def game_board
 	  	grid = ""
@@ -20,7 +19,7 @@ class Board
 	    	grid << " #{@board[index]} "
 	      	case index % 3
 	      		when 0, 1 then grid << "|"
-	      		when 2 then grid << "\n-----------\n" unless cell == 8
+	      		when 2 then grid << "\n-----------\n" unless index == 8
 	    	end
 	  	end
 	  	@board = grid
@@ -299,7 +298,7 @@ class Hard_cpu
 		@side_middle = [1, 3, 5, 7]
 		@open_sides = open_side
 		@open_corners = open_corner
-		@turn = count_integer
+		@open_spaces = open_space
 		if marker == "X"
 			@cpu_marker = "O"
 		else 
@@ -307,13 +306,10 @@ class Hard_cpu
 		end	
 		@move = cpu_move		
 	end
-	def count_integer
-		counter = 0
+	def open_space
 		@open_spaces = []
 		@game_array.each do |cell|
-			if cell.class == String
-				counter += 1
-			else 
+			if cell.class == Integer 
 				@open_spaces << cell
 			end
 		end
@@ -339,8 +335,7 @@ class Hard_cpu
 	end
 	def terminal_board
 		@middle_corner = [[0, 4], [2, 4], [6, 4], [8, 4]]
-		@block_moves = [[3, 1, 0], [1, 5, 2], [7, 5, 8], [3, 7, 6], [0, 7, 3], [0, 5, 1], [3, 2, 1], [2, 7, 5], [1, 6, 3], [5, 6, 7], [3, 8, 7], [1, 8, 5]]
-		@terminal_combos = [[0, 1, 2], [1, 2, 0], [3, 4, 5], [4, 5, 3], [6, 7, 8], [7, 8, 6], [0, 3, 6], [3, 6, 0], [1, 4, 7], [4, 7, 1], [2, 5, 8], [5, 8, 2], [2, 4, 6], [4, 6, 2], [0, 4, 8], [4, 8, 0], [0, 2, 1], [0, 6, 3], [0, 8, 4], [1, 7, 4], [2, 8, 5], [2, 6, 4], [3, 5, 4], [6, 8, 7]]
+		@terminal_combos = [[0, 1, 2], [1, 2, 0], [3, 4, 5], [4, 5, 3], [6, 7, 8], [7, 8, 6], [0, 3, 6], [3, 6, 0], [1, 4, 7], [4, 7, 1], [2, 5, 8], [5, 8, 2], [2, 4, 6], [4, 6, 2], [0, 4, 8], [4, 8, 0], [0, 2, 1], [0, 6, 3], [0, 8, 4], [1, 7, 4], [2, 8, 5], [2, 6, 4], [3, 5, 4], [6, 8, 7], [3, 1, 0], [1, 5, 2], [7, 5, 8], [3, 7, 6], [0, 7, 3], [0, 5, 1], [3, 2, 1], [2, 7, 5], [1, 6, 3], [5, 6, 7], [3, 8, 7], [1, 8, 5]]
 	end
 	def cpu_move
 		terminal_board
@@ -365,40 +360,14 @@ class Hard_cpu
 		elsif @open_spaces.count == 8
 			return @open_corners.shuffle.last.to_s
 		end	
-		@terminal_combos.each do |combo|
-			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
-				if @game_array[combo[0]] == @cpu_marker && @game_array[combo[1]] == @cpu_marker 
-					if @game_array.include?(combo[2])
-				 		return combo[2].to_s
-			 		end
-			 	end
+		@terminal_combos[0..23].each do |combo|
+			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false && @game_array[combo[0]] == @cpu_marker && @game_array[combo[1]] == @cpu_marker && @game_array.include?(combo[2])
+				return combo[2].to_s
 			end
 		end
 		@terminal_combos.each do |combo|
-			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
-				if @game_array[combo[0]] == @game_array[combo[1]] 
-					if @game_array.include?(combo[2])
-						return combo[2].to_s
-					end
-				end
-			end
-		end
-		@block_moves.each do |combo|
-			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
-				if @game_array[combo[0]] == @game_array[combo[1]] 
-					if @game_array.include?(combo[2])
-						return combo[2].to_s
-					end
-			 	end
-			end
-		end
-		@middle_corner.each do |combo|
-			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
-			 	if @game_array[combo[0]] == @game_array[combo[1]] 
-			 		if @open_corners.count == 2
-				 		return @open_corners.shuffle.last.to_s
-			 		end
-			 	end
+			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false && @game_array[combo[0]] == @game_array[combo[1]] && @game_array.include?(combo[2])
+				return combo[2].to_s
 			end
 		end
 		if @open_corners.count > 0
@@ -427,17 +396,10 @@ class The_game
 		else	
 			system "cls"
 			case game_type
-				when 1
-					Two_player.new
-				when 2
-					skill = 1
-					One_player.new(skill)	
-				when 3
-					skill = 2
-					One_player.new(skill)
-				when 4
-					skill = 3
-					One_player.new(skill)
+				when 1 then Two_player.new
+				when 2 then One_player.new(1)
+				when 3 then One_player.new(2)
+				when 4 then One_player.new(3)
 			end				
 		end	
 	end
