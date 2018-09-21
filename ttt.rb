@@ -11,8 +11,7 @@ class Board
 			end
 		end	
 			@board_array = @board
-			game_board << @board
-			@board = @board[0..58]	 
+			@board = game_board
 	end 
 	def game_board
 	  	grid = ""
@@ -20,7 +19,7 @@ class Board
 	    	grid << " #{@board[index]} "
 	      	case index % 3
 	      		when 0, 1 then grid << "|"
-	      		when 2 then grid << "\n-----------\n" unless cell == 8
+	      		when 2 then grid << "\n-----------\n" unless index == 8
 	    	end
 	  	end
 	  	@board = grid
@@ -299,7 +298,7 @@ class Hard_cpu
 		@side_middle = [1, 3, 5, 7]
 		@open_sides = open_side
 		@open_corners = open_corner
-		@turn = count_integer
+		@open_spaces = open_space
 		if marker == "X"
 			@cpu_marker = "O"
 		else 
@@ -307,13 +306,10 @@ class Hard_cpu
 		end	
 		@move = cpu_move		
 	end
-	def count_integer
-		counter = 0
+	def open_space
 		@open_spaces = []
 		@game_array.each do |cell|
-			if cell.class == String
-				counter += 1
-			else 
+			if cell.class == Integer
 				@open_spaces << cell
 			end
 		end
@@ -400,17 +396,10 @@ class The_game
 		else	
 			system "cls"
 			case game_type
-				when 1
-					Two_player.new
-				when 2
-					skill = 1
-					One_player.new(skill)	
-				when 3
-					skill = 2
-					One_player.new(skill)
-				when 4
-					skill = 3
-					One_player.new(skill)
+				when 1 then Two_player.new
+				when 2 then One_player.new(1)
+				when 3 then One_player.new(2)
+				when 4 then One_player.new(3)
 			end				
 		end	
 	end
