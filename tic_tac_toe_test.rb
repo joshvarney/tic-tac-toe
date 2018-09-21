@@ -170,36 +170,36 @@ class Tic_tac_toe_test < Minitest::Test
 	# 	marker = "X"
 	# 	assert_equal("O", Hard_cpu.new(game_array, marker).cpu_marker)
 	# end	
-	def test_that_middle_corner_loop_works
-		game_array = ["O", 1, 2, 3, "X", 5, 6, 7, 8]
-		marker = "O"
-		assert_equal("8", Hard_cpu.new(game_array, marker).move)
+	# def test_that_middle_corner_loop_works
+	# 	game_array = ["O", 1, 2, 3, "X", 5, 6, 7, 8]
+	# 	marker = "O"
+	# 	assert_equal("8", Hard_cpu.new(game_array, marker).move)
 	
-		game_array = [0, 1, "O", 3, "X", 5, 6, 7, 8]
-		marker = "O"
-		assert_equal("6", Hard_cpu.new(game_array, marker).move)
+	# 	game_array = [0, 1, "O", 3, "X", 5, 6, 7, 8]
+	# 	marker = "O"
+	# 	assert_equal("6", Hard_cpu.new(game_array, marker).move)
 
-		game_array = [0, 1, 2, 3, "O", 5, "X", 7, 8]
+	# 	game_array = [0, 1, 2, 3, "O", 5, "X", 7, 8]
+	# 	marker = "X"
+	# 	assert_equal("2", Hard_cpu.new(game_array, marker).move)
+	# end
+	def test_that_block_moves_loop_works
+		game_array = ["X", "X", 2, 3, "O", 5, 6, 7, 8]
 		marker = "X"
 		assert_equal("2", Hard_cpu.new(game_array, marker).move)
+
+		game_array = ["X", 1, "O", 3, "X", 5, 6, "O", 8]
+		marker = "X"
+		assert_equal("8", Hard_cpu.new(game_array, marker).move)
+
+		game_array = [0, 1, "X", 3, "O", "X", 6, 7, 8]
+		marker = "X"
+		assert_equal("8", Hard_cpu.new(game_array, marker).move)
+
+		game_array = ["O", "O", 2, 3, "X", 5, 6, 7, 8]
+		marker = "O"
+		assert_equal("2", Hard_cpu.new(game_array, marker).move)
 	end
-	# def test_that_block_moves_loop_works
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-
-# 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-# 		marker = "X"
-# 		assert_equal(, Hard_cpu.new(game_array, marker))
-	# end
 	# def test_that_terminal_combos_works_for_blocking
 # 		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 # 		marker = "X"
