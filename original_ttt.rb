@@ -339,7 +339,8 @@ class Hard_cpu
 	end
 	def terminal_board
 		@middle_corner = [[0, 4], [2, 4], [6, 4], [8, 4]]
-		@terminal_combos = [[0, 1, 2], [1, 2, 0], [3, 4, 5], [4, 5, 3], [6, 7, 8], [7, 8, 6], [0, 3, 6], [3, 6, 0], [1, 4, 7], [4, 7, 1], [2, 5, 8], [5, 8, 2], [2, 4, 6], [4, 6, 2], [0, 4, 8], [4, 8, 0], [0, 2, 1], [0, 6, 3], [0, 8, 4], [1, 7, 4], [2, 8, 5], [2, 6, 4], [3, 5, 4], [6, 8, 7], [3, 1, 0], [1, 5, 2], [7, 5, 8], [3, 7, 6], [0, 7, 3], [0, 5, 1], [3, 2, 1], [2, 7, 5], [1, 6, 3], [5, 6, 7], [3, 8, 7], [1, 8, 5]]
+		@block_moves = [[3, 1, 0], [1, 5, 2], [7, 5, 8], [3, 7, 6], [0, 7, 3], [0, 5, 1], [3, 2, 1], [2, 7, 5], [1, 6, 3], [5, 6, 7], [3, 8, 7], [1, 8, 5]]
+		@terminal_combos = [[0, 1, 2], [1, 2, 0], [3, 4, 5], [4, 5, 3], [6, 7, 8], [7, 8, 6], [0, 3, 6], [3, 6, 0], [1, 4, 7], [4, 7, 1], [2, 5, 8], [5, 8, 2], [2, 4, 6], [4, 6, 2], [0, 4, 8], [4, 8, 0], [0, 2, 1], [0, 6, 3], [0, 8, 4], [1, 7, 4], [2, 8, 5], [2, 6, 4], [3, 5, 4], [6, 8, 7]]
 	end
 	def cpu_move
 		terminal_board
@@ -364,14 +365,40 @@ class Hard_cpu
 		elsif @open_spaces.count == 8
 			return @open_corners.shuffle.last.to_s
 		end	
-		@terminal_combos[0..23].each do |combo|
-			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false && @game_array[combo[0]] == @cpu_marker && @game_array[combo[1]] == @cpu_marker && @game_array.include?(combo[2])
-				return combo[2].to_s
+		@terminal_combos.each do |combo|
+			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+				if @game_array[combo[0]] == @cpu_marker && @game_array[combo[1]] == @cpu_marker 
+					if @game_array.include?(combo[2])
+				 		return combo[2].to_s
+			 		end
+			 	end
 			end
 		end
 		@terminal_combos.each do |combo|
-			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false && @game_array[combo[0]] == @game_array[combo[1]] && @game_array.include?(combo[2])
-				return combo[2].to_s
+			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+				if @game_array[combo[0]] == @game_array[combo[1]] 
+					if @game_array.include?(combo[2])
+						return combo[2].to_s
+					end
+				end
+			end
+		end
+		@block_moves.each do |combo|
+			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+				if @game_array[combo[0]] == @game_array[combo[1]] 
+					if @game_array.include?(combo[2])
+						return combo[2].to_s
+					end
+			 	end
+			end
+		end
+		@middle_corner.each do |combo|
+			if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false
+			 	if @game_array[combo[0]] == @game_array[combo[1]] 
+			 		if @open_corners.count == 2
+				 		return @open_corners.shuffle.last.to_s
+			 		end
+			 	end
 			end
 		end
 		if @open_corners.count > 0
