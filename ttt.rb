@@ -11,7 +11,7 @@ class Board
 			end
 		end	
 			@board_array = @board
-			@board = game_board
+			@board = game_board	 
 	end 
 	def game_board
 	  	grid = ""
@@ -309,7 +309,7 @@ class Hard_cpu
 	def open_space
 		@open_spaces = []
 		@game_array.each do |cell|
-			if cell.class == Integer
+			if cell.class == Integer 
 				@open_spaces << cell
 			end
 		end
