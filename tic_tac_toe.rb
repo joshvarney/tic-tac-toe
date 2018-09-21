@@ -305,9 +305,8 @@ class Hard_cpu
 		else 
 			@cpu_marker = "X"	
 		end	
-		@move = cpu_move	
+		@move = cpu_move		
 	end
-		attr_reader :move
 	def count_integer
 		counter = 0
 		@open_spaces = []
@@ -329,7 +328,6 @@ class Hard_cpu
 		end
 		@open_corners		 
 	end
-		attr_reader :open_corners
 	def open_side
 		@open_sides = []
 		@game_array.each do |cell|
@@ -419,7 +417,7 @@ class The_game
 		puts " "
 		puts "Select game type; 1 = PVP, 2 = Easy CPU, 3 = Medium CPU, 4 = Hard CPU"
 		puts " "
-		@game_type = gets.chomp
+		game_type = gets.chomp
 		unless ("1".."4").include?(game_type)
 			game_type = 0
 		end
@@ -443,6 +441,5 @@ class The_game
 			end				
 		end	
 	end
-	attr_reader :game_type
 end	
-# The_game.new
+The_game.new
