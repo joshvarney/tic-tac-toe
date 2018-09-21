@@ -234,18 +234,30 @@ class Tic_tac_toe_test < Minitest::Test
 	# 	marker = "O"
 	# 	assert_equal("5", Hard_cpu.new(game_array, marker).move)
 	# end
-	def test_that_starting_moves_works_for_x_and_o
-		game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-		marker = "O"
-		refute_equal("4", Hard_cpu.new(game_array, marker).open_corners.count)
+	# def test_that_starting_moves_works_for_x_and_o
+	# 	game_array = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+	# 	marker = "O"
+	# 	refute_equal("4", Hard_cpu.new(game_array, marker).open_corners)
 
-		game_array = ["X", 1, 2, 3, 4, 5, 6, 7, 8]
-		marker = "X"
-		assert_equal("4", Hard_cpu.new(game_array, marker).move)
-	end
-	# def test_that_will_take_random_corner_when_x_takes_middle	
-	# 	game_array = [0, 1, 2, 3, "X", 5, 6, 7, 8]
+	# 	game_array = ["X", 1, 2, 3, 4, 5, 6, 7, 8]
 	# 	marker = "X"
-	# 	assert_equal(3, Hard_cpu.new(game_array, marker).open_corners.count)				
-	# end	
+	# 	assert_equal("4", Hard_cpu.new(game_array, marker).move)
+	# end
+	def test_that_will_take_random_corner_when_x_takes_middle	
+		game_array = [0, 1, 2, 3, "X", 5, 6, 7, 8]
+		marker = "X"
+		refute_equal("1", Hard_cpu.new(game_array, marker).move)
+
+		game_array = [0, 1, 2, 3, "X", 5, 6, 7, 8]
+		marker = "X"
+		refute_equal("3", Hard_cpu.new(game_array, marker).move)				
+	
+		game_array = [0, 1, 2, 3, "X", 5, 6, 7, 8]
+		marker = "X"
+		refute_equal("5", Hard_cpu.new(game_array, marker).move)
+
+		game_array = [0, 1, 2, 3, "X", 5, 6, 7, 8]
+		marker = "X"
+		refute_equal("7", Hard_cpu.new(game_array, marker).move)
+	end	
 end

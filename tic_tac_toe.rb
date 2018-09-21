@@ -305,7 +305,8 @@ class Hard_cpu
 		else 
 			@cpu_marker = "X"	
 		end	
-		@move = cpu_move		
+		@move = cpu_move
+		@open_corners = open_corner		
 	end
 		attr_reader :move
 	def count_integer
