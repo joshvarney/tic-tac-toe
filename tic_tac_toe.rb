@@ -329,6 +329,7 @@ class Hard_cpu
 		end
 		@open_corners		 
 	end
+		attr_reader :open_corners
 	def open_side
 		@open_sides = []
 		@game_array.each do |cell|
