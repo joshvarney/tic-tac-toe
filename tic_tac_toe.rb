@@ -1,7 +1,7 @@
 class Board
 	def initialize(move)
 		if move.class == Array 
-			@board = move[0..9]
+			@board = move[0..8]
 		elsif	
 			@board = Array.new(9)
 			counter = 0
@@ -190,12 +190,9 @@ class One_player
 							puts " "
 							puts " "
 							case @skill
-								when 1
-									moves = Easy_cpu.new(@game_array).move
-								when 2
-									moves = Medium_cpu.new(@game_array).move
-								when 3
-									moves = Hard_cpu.new(@game_array, @marker).move	
+								when 1 then moves = Easy_cpu.new(@game_array).move
+								when 2 then moves = Medium_cpu.new(@game_array).move
+								when 3 then moves = Hard_cpu.new(@game_array, @marker).move	
 							end	
 							sleep(2)
 						elsif @marker == "O" && count.even?
@@ -203,12 +200,9 @@ class One_player
 							puts " "
 							puts " "
 							case @skill
-								when 1
-									moves = Easy_cpu.new(@game_array).move
-								when 2
-									moves = Medium_cpu.new(@game_array).move
-								when 3
-									moves = Hard_cpu.new(@game_array, @marker).move	
+								when 1 then moves = Easy_cpu.new(@game_array).move
+								when 2 then moves = Medium_cpu.new(@game_array).move
+								when 3 then moves = Hard_cpu.new(@game_array, @marker).move	
 							end	
 							sleep(2)
 						end			
@@ -404,4 +398,4 @@ class The_game
 		end	
 	end
 end	
-The_game.new
+# The_game.new

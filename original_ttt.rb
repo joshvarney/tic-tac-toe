@@ -1,7 +1,7 @@
 class Board
 	def initialize(move)
 		if move.class == Array 
-			@board = move[0..9]
+			@board = move[0..8]
 		elsif	
 			@board = Array.new(9)
 			counter = 0
