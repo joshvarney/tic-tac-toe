@@ -3,8 +3,15 @@
 		<div class="head">
 			<h1>Varney's Tic Tac Toe</h1>
 		</div>
-		<h1><%=board[9]%> <%=board[10]%></h1>
-			
+		<%if board.count > 9%>
+			<div class="game_over">
+				<h1><%=board[10]%> <%=board[9]%></h1>
+			</div>
+		<%else%>
+			<div class="transparent">
+				<h1>Nothing</h1>
+			</div>
+		<%end%>		
 			<div class="container">
 				<table id="board">
 				<%counter = 0%>
@@ -40,7 +47,11 @@
 						<%counter += 1%>
 					<%end%>
 				</table>
-			</div>	
-	
+			</div>
+			<%if board.count > 9%>	
+				<div class="game_over_buttons">
+					<br><a href="/"><input class="button2" type="button" value="Game Menu"></a>
+				</div>
+			<%end%>	
 	</body>
 </html>
