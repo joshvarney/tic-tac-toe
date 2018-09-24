@@ -4,12 +4,16 @@ enable :sessions
 
 get '/' do
 	marker = "X"
-	skill = 3
+	skill = 0
 	# skill = parmas[:skill]
 	# marker = params[:marker]
 	session[:skill] = skill
 	session[:marker] = marker
 	session[:board] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+	if session[:marker] == "O" && session[:skill] > 0
+		game_array = One_player.new(session[:skill], session[:board], session[:marker]).game_array
+		session[:board] = game_array
+	end	
 	erb :tic_tac_toe, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
 end
 post '/ttt' do
@@ -51,10 +55,34 @@ post '/ttt' do
 		board[8] = cell8
 	end
 	session[:board] = board
-	game_array = Winning.new(session[:board]).check_win
-	if game_array.count == 9
-		game_array = One_player.new(session[:skill], session[:board], session[:marker]).game_array
-	end
+	case session[:skill]
+	when 0 then game_array = Winning.new(session[:board]).check_win
+		if session[:marker] == "X"
+			session[:marker] = "O"
+		elsif session[:marker] == "O"
+			session[:marker] = "X"
+		end		
+		if game_array.count == 10
+			counter = 0
+			game_array[0..8].each do |cell|				
+				if cell.class == String
+					counter += 1
+				end
+			end
+			case counter.even?
+				when true then game_array[10] = "Player Two Wins"
+				when false then game_array[10] = "Player One Wins"
+			end	
+		end	
+	when 1,2,3 then game_array = Winning.new(session[:board]).check_win
+		case game_array.count
+		when 10 then game_array[10] = "You Are the"
+		when 9 then	game_array = One_player.new(session[:skill], session[:board], session[:marker]).game_array
+			if game_array.count == 10
+				game_array[10] = "The Computer is the"
+			end	
+		end
+	end			
 	session[:board] = game_array
 	erb :tic_tac_toe, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
 end
