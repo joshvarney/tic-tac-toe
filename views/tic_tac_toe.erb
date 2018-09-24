@@ -3,26 +3,90 @@
 		<div class="head">
 			<h1>Varney's Tic Tac Toe</h1>
 		</div>
-		<form>
+
+			<h1><%=board%></h1>
+			<h1><%=marker%></h1>
 			<div class="container">
 				<table id="board">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-			</div>
-		</form>			
+				<tr>
+					<td><form method="post" action="ttt">
+						<%if board[0].class == Integer%>
+							<input hidden type="text" name="cell0" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[0]%>
+						<%end%></form>	
+					</td>
+					<td><form method="post" action="ttt">
+						<%if board[1].class == Integer%>
+							<input hidden type="text" name="cell1" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[1]%>
+						<%end%></form>	
+					</td>
+					<td><form method="post" action="ttt">
+						<%if board[2].class == Integer%>
+							<input hidden type="text" name="cell2" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[2]%>
+						<%end%></form>	
+					</td>
+				</tr>
+				<tr>
+					<td><form method="post" action="ttt">
+						<%if board[3].class == Integer%>
+							<input hidden type="text" name="cell3" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[3]%>
+						<%end%></form>	
+					</td>
+					<td><form method="post" action="ttt">
+						<%if board[4].class == Integer%>
+							<input hidden type="text" name="cell4" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[4]%>
+						<%end%></form>	
+					</td>
+					<td><form method="post" action="ttt">
+						<%if board[5].class == Integer%>
+							<input hidden type="text" name="cell5" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[5]%>
+						<%end%></form>	
+					</td>
+				</tr>
+				<tr>
+					<td><form method="post" action="ttt">
+						<%if board[6].class == Integer%>
+							<input hidden type="text" name="cell6" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[6]%>
+						<%end%></form>	
+					</td>
+					<td><form method="post" action="ttt">
+						<%if board[7].class == Integer%>
+							<input hidden type="text" name="cell7" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[7]%>
+						<%end%></form>	
+					</td>
+					<td><form method="post" action="ttt">
+						<%if board[8].class == Integer%>
+							<input hidden type="text" name="cell8" value="<%=marker%>">
+							<input class="button" type="submit" value=" ">
+						<%else%>	
+							<%=board[8]%>
+						<%end%></form>	
+					</td>
+				</tr>
+			</table>
+		</div>			
 	</body>
 </html>

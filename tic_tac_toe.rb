@@ -1,32 +1,32 @@
-class Board
-	def initialize(move)
-		if move.class == Array 
-			@board = move[0..8]
-		elsif	
-			@board = Array.new(9)
-			counter = 0
-			@board.each do |cell|
-				@board[counter] = counter
-				counter += 1
-			end
-		end	
-			@board_array = @board
-			@board = game_board	 
-	end 
-	def game_board
-	  	grid = ""
-	    @board.each_with_index do |cell, index|
-	    	grid << " #{@board[index]} "
-	      	case index % 3
-	      		when 0, 1 then grid << "|"
-	      		when 2 then grid << "\n-----------\n" unless index == 8
-	    	end
-	  	end
-	  	@board = grid
-	end
-	attr_reader :board_array
-	attr_reader :board	
-end	
+# class Board
+# 	def initialize(move)
+# 		if move.class == Array 
+# 			@board = move[0..8]
+# 		elsif	
+# 			@board = Array.new(9)
+# 			counter = 0
+# 			@board.each do |cell|
+# 				@board[counter] = counter
+# 				counter += 1
+# 			end
+# 		end	
+# 			@board_array = @board
+# 			@board = game_board	 
+# 	end 
+# 	def game_board
+# 	  	grid = ""
+# 	    @board.each_with_index do |cell, index|
+# 	    	grid << " #{@board[index]} "
+# 	      	case index % 3
+# 	      		when 0, 1 then grid << "|"
+# 	      		when 2 then grid << "\n-----------\n" unless index == 8
+# 	    	end
+# 	  	end
+# 	  	@board = grid
+# 	end
+# 	attr_reader :board_array
+# 	attr_reader :board	
+# end	
 class Winning
 	def initialize(game_array)
 		game_array = game_array
@@ -136,46 +136,47 @@ class Two_player
 	end
 end
 class One_player
-	def initialize(skill)
+	def initialize(skill, game_array, marker)
 		@skill = skill
 		start_board = nil
-		stuff = Board.new(start_board)
-		game_board = stuff.board
-		@game_array = stuff.board_array
-		@marker = pick_marker
+		# stuff = Board.new(start_board)
+		# game_board = stuff.board
+		# @game_array = stuff.board_array
+		@game_array = game_array
+		@marker = marker
 		one_board
 	end
-	def pick_marker
-		puts " "
-		puts "Varney's TTT"
-		puts " "
-		puts "Select X or O (X Goes First):"
-		puts " "
-		@marker = gets.chomp.upcase
-		system "cls"
-		unless ["X", "O"].include?(@marker)
-			One_player.new(@skill)
-		end
-		@marker	
-	end	
+	# def pick_marker
+	# 	puts " "
+	# 	puts "Varney's TTT"
+	# 	puts " "
+	# 	puts "Select X or O (X Goes First):"
+	# 	puts " "
+	# 	@marker = gets.chomp.upcase
+	# 	system "cls"
+	# 	unless ["X", "O"].include?(@marker)
+	# 		One_player.new(@skill)
+	# 	end
+	# 	@marker	
+	# end	
 	def one_board
 		@marker
 		p1 = "X"
 		p2 = "O"
 		tie = "Its a Tie"
-		wrong_space = " "
-		count = 0
-		until count == 10	
-			new_board = Board.new(@game_array)
-			puts " "
-			puts "Varney's TTT"
-			puts " "
-			puts new_board.board
-			puts "#{wrong_space}"
+		# wrong_space = " "
+		# count = 0
+		# until count == 10	
+		# 	new_board = Board.new(@game_array)
+		# 	puts " "
+		# 	puts "Varney's TTT"
+		# 	puts " "
+		# 	puts new_board.board
+		# 	puts "#{wrong_space}"
 			case @game_array.count
 				when 9 then
-					if count == 9
-						break
+					# if count == 9
+					# 	break
 					else	
 						if @marker == "X" && count.even?	
 							puts "Your turn enter number of the space to place your #{@marker}:"	
