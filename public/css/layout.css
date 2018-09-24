@@ -1,4 +1,4 @@
-/*html {
+html {
   border: 5px solid black;
   background: url("/images/storm_trooper2.jpg") no-repeat top center; 
   -webkit-background-size: cover;
@@ -16,15 +16,15 @@ body {
   opacity: .6;
   color: darkgrey;
   background-color: black;
-}*/
+}
 .container {
-  background-color: white;
-  opacity: 1;
-  width: 25%;
-  height: 35%;
+  background-color: black;
+  opacity: .8;
+  width: 265px;
+  height: 221px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 55px;
+  margin-top: 10%;
   border: 8px solid black;
 }
 table {
@@ -34,7 +34,7 @@ td {
   text-align: center;
   margin: auto;
   font-size: 50px;
-  color: black;
+  color: darkgrey;
   width: 33.333%;
 }
 td:after {

@@ -3,19 +3,26 @@ require_relative 'tic_tac_toe.rb'
 enable :sessions
 
 get '/' do
-	marker = "X"
-	skill = 0
-	# skill = parmas[:skill]
-	# marker = params[:marker]
-	session[:skill] = skill
-	session[:marker] = marker
 	session[:board] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+	erb :first_page, locals:{board: session[:board]}
+end
+post '/game' do
+	skill = params[:skill]
+	marker = params[:marker]
+	session[:skill] = skill.to_i
+	session[:marker] = marker
 	if session[:marker] == "O" && session[:skill] > 0
 		game_array = One_player.new(session[:skill], session[:board], session[:marker]).game_array
 		session[:board] = game_array
 	end	
-	erb :tic_tac_toe, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
+	erb :first_page, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
+	redirect '/ttt'
 end
+get '/ttt' do
+
+	board = session[:board]
+	erb :tic_tac_toe, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
+end	
 post '/ttt' do
 	board = session[:board]
 	cell0 = params[:cell0]
@@ -73,6 +80,15 @@ post '/ttt' do
 				when true then game_array[10] = "Player Two Wins"
 				when false then game_array[10] = "Player One Wins"
 			end	
+		end
+		counter = 0
+		game_array.each do |cell|
+			if cell == "X" || cell == "O"
+				counter += 1
+			end
+		end
+		if counter == 9
+			game_array[9] = "Its a Tie"
 		end	
 	when 1,2,3 then game_array = Winning.new(session[:board]).check_win
 		case game_array.count
@@ -82,6 +98,15 @@ post '/ttt' do
 				game_array[10] = "The Computer is the"
 			end	
 		end
+		counter = 0
+		game_array.each do |cell|
+			if cell == "X" || cell == "O"
+				counter += 1
+			end
+		end
+		if counter == 9
+			game_array[9] = "Its a Tie"
+		end	
 	end			
 	session[:board] = game_array
 	erb :tic_tac_toe, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
