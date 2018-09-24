@@ -8,7 +8,7 @@ get '/' do
 	# marker = params[:marker]
 	session[:skill] = skill
 	session[:marker] = marker
-	session[:board] = [0, "X", 2, 3, 4, 5, 6, 7, 8]
+	session[:board] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 	erb :tic_tac_toe, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
 end
 post '/ttt' do
@@ -50,7 +50,10 @@ post '/ttt' do
 		board[8] = cell8
 	end
 	session[:board] = board
-	move = Hard_cpu.new(session[:skill], session[:board], session[:marker])
-	session[:board] = move
+	game_array = Winning.new(session[:board])
+	if game_array.count == 9
+		game_array = One_player.new(session[:skill], session[:board], session[:marker]).game_array
+	end
+	session[:board] = game_array
 	erb :tic_tac_toe, locals:{board: session[:board], marker: session[:marker], skill: session[:skill]}
 end
