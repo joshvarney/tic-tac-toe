@@ -5,6 +5,7 @@ enable :sessions
 get '/' do
 	marker = "X"
 	skill = 3
+	# skill = parmas[:skill]
 	# marker = params[:marker]
 	session[:skill] = skill
 	session[:marker] = marker
@@ -50,7 +51,7 @@ post '/ttt' do
 		board[8] = cell8
 	end
 	session[:board] = board
-	game_array = Winning.new(session[:board])
+	game_array = Winning.new(session[:board]).check_win
 	if game_array.count == 9
 		game_array = One_player.new(session[:skill], session[:board], session[:marker]).game_array
 	end

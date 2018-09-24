@@ -1,32 +1,3 @@
-# class Board
-# 	def initialize(move)
-# 		if move.class == Array 
-# 			@board = move[0..8]
-# 		elsif	
-# 			@board = Array.new(9)
-# 			counter = 0
-# 			@board.each do |cell|
-# 				@board[counter] = counter
-# 				counter += 1
-# 			end
-# 		end	
-# 			@board_array = @board
-# 			@board = game_board	 
-# 	end 
-# 	def game_board
-# 	  	grid = ""
-# 	    @board.each_with_index do |cell, index|
-# 	    	grid << " #{@board[index]} "
-# 	      	case index % 3
-# 	      		when 0, 1 then grid << "|"
-# 	      		when 2 then grid << "\n-----------\n" unless index == 8
-# 	    	end
-# 	  	end
-# 	  	@board = grid
-# 	end
-# 	attr_reader :board_array
-# 	attr_reader :board	
-# end	
 class Winning
 	def initialize(game_array)
 		game_array = game_array
@@ -148,29 +119,11 @@ class One_player
 		@game_array = one_board
 	end
 	def one_board
-		@marker
-		p1 = "X"
-		p2 = "O"
-		tie = "Its a Tie"
-		case @game_array.count
-			when 9 then
-				case @skill
-					when 1 then moves = Easy_cpu.new(@game_array).move
-					when 2 then moves = Medium_cpu.new(@game_array).move
-					when 3 then moves = Hard_cpu.new(@game_array, @marker).move	
-				p moves
-				end					
-			# when 10 then
-			# 	if @marker == "O" && count.even?
-			# 		winner = "You are"
-			# 	elsif @marker == "O" && count.odd?
-			# 		winner = "The computer is"
-			# 	elsif @marker == "X" && count.even?
-			# 		winner = "The computer is"
-			# 	elsif @marker == "X" && count.odd?
-			# 		winner = "You are"	
-			# 	end		
-		end
+		case @skill
+			when 1 then moves = Easy_cpu.new(@game_array).move
+			when 2 then moves = Medium_cpu.new(@game_array).move
+			when 3 then moves = Hard_cpu.new(@game_array, @marker).move	
+		end					
 		counter = 0
 		@game_array.each do |cell|
 			if cell.to_s == moves
@@ -178,9 +131,7 @@ class One_player
 				@game_array = Winning.new(@game_array).check_win
 			end
 		counter += 1
-		@game_array
-		end
-		p @game_array						
+		end						
 	end
 	attr_reader :game_array
 end
