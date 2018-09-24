@@ -152,7 +152,7 @@ class Hard_cpu
 			end
 		elsif @open_spaces.count == 6
 			@stupid_move.each do |combo|
-				if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false && @game_array.include?(combo[2]) == false && combo[0] != combo[2]		
+				if @game_array.include?(combo[0]) == false && @game_array.include?(combo[1]) == false && @game_array.include?(combo[2]) == false && @game_array[combo[0]] != @game_array[combo[2]]		
 					return @open_corners.shuffle.last.to_s
 				end
 			end			
