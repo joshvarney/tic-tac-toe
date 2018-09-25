@@ -87,7 +87,7 @@ post '/ttt' do
 					counter += 1
 				end
 			end
-			if counter == 9
+			if counter == 9 && game_array.count == 9
 				game_array[9] = "Its a Tie"
 			end	
 		when 1,2,3 then game_array = Winning.new(session[:board]).check_win
@@ -104,7 +104,7 @@ post '/ttt' do
 					counter += 1
 				end
 			end
-			if counter == 9
+			if counter == 9 && game_array.count == 9
 				game_array[9] = "Its a Tie"
 			end	
 		end			
