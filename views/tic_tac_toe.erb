@@ -3,55 +3,60 @@
 		<div class="head">
 			<h1>Varney's Tic Tac Toe</h1>
 		</div>
-		<%if board.count > 9%>
-			<div class="game_over">
-				<h1><%=board[10]%> <%=board[9]%></h1>
-			</div>
-		<%else%>
-			<div class="transparent">
-				<h1>Nothing</h1>
-			</div>
-		<%end%>		
-			<div class="container">
-				<table id="board">
-				<%counter = 0%>
-					<%board[0..8].each do |cell|%>
-						<%if counter == 0 || counter == 3 || counter == 6%>
-							<tr>
-								<td><form method="post" action="ttt">
-									<%if cell.class == Integer%>
-										<input hidden type="text" name="cell<%=counter%>" value="<%=marker%>">
-										<input class="button" type="submit" value=" ">
-									<%else%>	
-										<%=cell%>
-									<%end%></form>	
-								</td>
-								<td><form method="post" action="ttt">
-									<%if board[counter + 1].class == Integer%>
-										<input hidden type="text" name="cell<%=counter + 1%>" value="<%=marker%>">
-										<input class="button" type="submit" value=" ">
-									<%else%>	
-										<%=board[counter + 1]%>
-									<%end%></form>	
-								</td>
-								<td><form method="post" action="ttt">
-									<%if board[counter + 2].class == Integer%>
-										<input hidden type="text" name="cell<%=counter + 2%>" value="<%=marker%>">
-										<input class="button" type="submit" value=" ">
-									<%else%>	
-										<%=board[counter + 2]%>
-									<%end%></form>	
-								</td>
-							</tr>
-						<%end%>
-						<%counter += 1%>
-					<%end%>
-				</table>
-			</div>
-			<%if board.count > 9%>	
-				<div class="game_over_buttons">
-					<br><a href="/"><input class="button2" type="button" value="Game Menu"></a>
+			<%if board.count > 9%>
+				<div class="game_over">
+					<h1><%=board[10]%> <%=board[9]%></h1>
 				</div>
-			<%end%>	
+			<%else%>
+				<div class="transparent">
+					<h1>Nothing</h1>
+				</div>
+			<%end%>		
+				<div class="container">
+					<table class="table_1">
+					<%counter = 0%>
+						<%board[0..8].each do |cell|%>
+							<%if counter == 0 || counter == 3 || counter == 6%>
+								<tr class="tr_1">
+									<td class="td_1"><form method="post" action="ttt">
+										<%if cell.class == Integer%>
+											<input hidden type="text" name="cell<%=counter%>" value="<%=marker%>">
+											<input class="button" type="submit" value=" ">
+										<%else%>	
+											<%=cell%>
+										<%end%></form>	
+									</td>
+									<td class="td_1"><form method="post" action="ttt">
+										<%if board[counter + 1].class == Integer%>
+											<input hidden type="text" name="cell<%=counter + 1%>" value="<%=marker%>">
+											<input class="button" type="submit" value=" ">
+										<%else%>	
+											<%=board[counter + 1]%>
+										<%end%></form>	
+									</td>
+									<td class="td_1"><form method="post" action="ttt">
+										<%if board[counter + 2].class == Integer%>
+											<input hidden type="text" name="cell<%=counter + 2%>" value="<%=marker%>">
+											<input class="button" type="submit" value=" ">
+										<%else%>	
+											<%=board[counter + 2]%>
+										<%end%></form>	
+									</td>
+								</tr>
+							<%end%>
+							<%counter += 1%>
+						<%end%>
+					</table>
+				</div>
+				<%if board.count > 9%>	
+					<div class="game_over_buttons">
+						<br><a href="/ttt"><input class="button2" type="button" value="Play Again"></a>
+						<a href="/stats"><input class="button2" type="button" value="Stats"></a>
+						<a href="/"><input class="button2" type="button" value="Log Out"></a>
+						<%if skill > 0%> 
+							<br><a href="/game"><input class="button2" type="button" value="Change Difficulty"></a>
+						<%end%>	
+					</div>
+				<%end%>	
 	</body>
 </html>

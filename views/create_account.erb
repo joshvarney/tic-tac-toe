@@ -1,0 +1,36 @@
+<html>
+	<body>
+		<div class="head">
+			<h1>Varney's Tic Tac Toe</h1>
+		</div>		
+		<div class="container_login">
+			<h2>Create Account</h2>
+			<form method="post" action="create_account">
+				<input type="text" name="user" placeholder="Player 1" required><br><br>
+				<input id="pass" type="password" name="pass" placeholder="Password" required><br><br>
+				<input id="cpass" type="password" name="cpass" placeholder="Confirm" required><br><br>
+				<a class="error"><%=error%></a>
+				<div class="error"><p id="validate-status"></p></div>
+				<input class="button2" type="submit" value="Create">
+			</form>
+				<a href="/"><input class="button2" type="button" value="Go Back"></a>
+
+		</div>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+			  $("#cpass").keyup(validate);
+			});
+			function validate() {
+			  var pass = $("#pass").val();
+			  var cpass = $("#cpass").val();		 
+			    if(pass == cpass) {
+			       $("#validate-status").text("Match");        
+			    }
+			    else {
+			        $("#validate-status").text("No Match");  
+			    }		    
+			}
+		</script>
+	</body>
+</html>				

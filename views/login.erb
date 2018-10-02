@@ -1,0 +1,36 @@
+<html>
+	<body>
+		<div class="head">
+			<h1>Varney's Tic Tac Toe</h1>
+		</div>
+		<div class="container_login">
+			<form method="post" action="login">
+				<input type="text" name="user1" placeholder="Player 1" required><br><br>
+				<input type="password" name="pass1" placeholder="Password" required><br><br>
+				<a class="error"><%=error%></a><br>
+			<div class="radios_login">
+				<input id="one_player" type="radio" name="type" value="1" checked required> One Player<br>
+				<input id="two_player" type="radio" name="type" value="2"> Two Player<br><br>
+					<div class="reveal_if_active">
+						<input disabled class="require_if_active" type="text" name="user2" placeholder="Player 2"><br><br>
+						<input disabled class="require_if_active" type="password" name="pass2" placeholder="Password"><br><br>
+					</div>									
+			</div>
+				<a href="/create_account">Create Account</a>
+				<br><br><input class="button2" type="submit" value="Play Game">
+			</form>
+			<a href="/stats"><input class="button2" type="button" value="Stats"></a>
+		</div>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+	        $("#two_player").click(function() {
+	            $(".require_if_active").prop("required", true);
+	            $(".require_if_active").prop("disabled", false);  
+	        });
+	        $("#one_player").click(function() {
+	            $(".require_if_active").prop("required", false);
+	            $(".require_if_active").prop("disabled", true);  
+	        });
+	    </script>    	
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+	<body>
+		<div class="head">
+			<h1>Varney's Tic Tac Toe</h1>
+		</div>
+		<div class="container_stats">
+			<table class="table_2">
+				<tr class="tr_2">
+				 	<th class="th_2">Player</th>
+				 	<th class="th_2">PVP Wins</th>
+				 	<th class="th_2">PVP Loss</th>
+				 	<th class="th_2">PVP Ties</th>
+				 	<th class="th_2">PVP Games</th>
+				 	<th class="th_2">Hard Wins</th>
+				 	<th class="th_2">Hard Loss</th>
+				 	<th class="th_2">Hard Ties</th>
+				 	<th class="th_2">Hard Games</th>
+				 	<th class="th_2">Total Games</th>
+				</tr>
+				<% results_table.each do |stuff| %>
+				<tr class="tr_2">
+					<% stuff.each do |things|%>
+					<td class="td_2"><%=things[0]%></td>
+					<% end %>
+				</tr>
+				<% end %>
+			</table>		
+			<br><input class="button2" type="button" value="Go Back" onclick="history.back(-1)">
+		</div>	
+	</body>
+</html>
