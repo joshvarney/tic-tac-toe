@@ -5,7 +5,8 @@ class Board
     board_size
   end
   def board_size
-    @board_array = Array.new(@size * @size)
+    @board_array = Array.new(@size * @size).map.with_index{ |x, i| i }
+    p @board_array
   end
   attr_accessor :board_array
   attr_accessor :size
