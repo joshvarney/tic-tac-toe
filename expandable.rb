@@ -13,11 +13,30 @@ class Board
     @grid = ""
     counter = 0
     @board_array.each_with_index do |cell, index|
-      @grid << " #{@board_array[index]} "
+      if cell.class == String
+        @grid << " #{@board_array[index]} "
+      elsif cell >= 0 && cell < 10
+        @grid << " #{index} "
+      elsif cell >= 10 && cell < 100  
+        @grid << " #{index}"
+      elsif cell >= 100 && cell < 1000
+        @grid << "#{index}"
+      else
+        @grid << "#{index}"  
+      end    
         case counter 
-        when 0..@size-2 then grid << "|"
-        when @size-1 then grid << "\n------------\n" unless index == @board_array.count - 1
-      end
+        when 0..@size-2 then grid << "|" 
+        when @size-1 then
+          count = 1 
+          @size.times do
+            case count
+            when 1 then grid << "\n----" unless index == @board_array.count - 1
+            when 2..@size-1 then grid << "----" unless index == @board_array.count - 1
+            when @size then grid << "---\n" unless index == @board_array.count - 1
+            end    
+            count += 1
+          end  
+        end
       counter += 1
       if counter == @size
         counter = 0
