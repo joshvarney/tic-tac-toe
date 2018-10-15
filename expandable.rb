@@ -6,8 +6,12 @@ class Board
     draw_board
   end
   def board_size
-    @board_array = Array.new(@size * @size).map.with_index{ |x, i| i }
-    @board_array
+    if @board_array == nil
+      @board_array = Array.new(@size * @size).map.with_index{ |x, i| i }
+    else
+      @board_array = @board_array
+    end
+    @board_array  
   end
   def draw_board
     @grid = ""
@@ -48,4 +52,24 @@ class Board
   attr_accessor :board_array
   attr_accessor :size
 end
-puts Board.new.grid
+class Human
+  def initialize()
+    @board_array = Board.new.board_array
+    human_move
+  end
+  def human_move
+    marker = "X"
+    puts Board.new.grid
+    puts "Enter number for your move:"
+    move = gets.chomp
+    @board_array.each do |cell|
+      if cell == move.to_i
+        @board_array[cell] = marker
+        break
+      end
+    end
+    @board_array   
+  end  
+  attr_accessor :board_array
+end
+Human.new  
