@@ -1,17 +1,17 @@
 class Board 
-  def initialize()
-    puts "Please enter board size you want minimum is 3:"
-    @size = gets.chomp.to_i
-    board_size
+  def initialize(argument)
+    if argument.class == Array
+      @board_array = argument 
+      @size = Math.sqrt(@board_array.count).to_i
+    else
+      @size = argument
+      @board_array = board_size
+    end 
     draw_board
   end
   def board_size
-    if @board_array == nil
-      @board_array = Array.new(@size * @size).map.with_index{ |x, i| i }
-    else
-      @board_array = @board_array
-    end
-    @board_array  
+    array = Array.new(@size * @size).map.with_index{ |x, i| i }
+    array  
   end
   def draw_board
     @grid = ""
@@ -52,24 +52,68 @@ class Board
   attr_accessor :board_array
   attr_accessor :size
 end
-class Human
-  def initialize()
-    @board_array = Board.new.board_array
-    human_move
+class One_player
+  def initialize(grid, board_array)
+    @grid = grid
+    @board_array = board_array
+    play_game
   end
-  def human_move
+  def play_game
+    system "cls"
+		puts " "
+		puts "Varney's TTT"
+		puts " "
+		puts @grid
+		puts " "
+    puts "Select number of your move:"
+    move = gets.chomp.to_i
+    board_array = @board_array
+    update_array = Human.new(move, board_array)
+    update_array = update_array.board_array
+    stuff = Board.new(update_array)
+    @grid = stuff.grid
+    @board_array = stuff.board_array
+    play_game
+  end
+end
+
+class Human
+  def initialize(move, board_array)
+    move = move.to_i
     marker = "X"
-    puts Board.new.grid
-    puts "Enter number for your move:"
-    move = gets.chomp
-    @board_array.each do |cell|
-      if cell == move.to_i
-        @board_array[cell] = marker
-        break
+    @board_array = board_array
+    if @board_array.include?(move)
+      @board_array.each do |cell|
+        if cell == move
+          @board_array[cell] = marker
+          break
+        end
       end
-    end
-    @board_array   
+    end  
+    @board_array
   end  
   attr_accessor :board_array
 end
-Human.new  
+
+class The_game
+  def initialize()
+    system "cls"
+		puts " "
+		puts "Varney's TTT"
+		puts " "
+		puts "Select Board size 4 x 4 up to 31 x 31:"
+		puts " "
+    size = gets.chomp.to_i
+    if size > 3 && size < 32
+      stuff = Board.new(size)
+      grid = stuff.grid
+      board_array = stuff.board_array
+      One_player.new(grid, board_array)
+    else
+      puts "Try another number"
+      sleep 1.5
+      The_game.new
+    end    
+  end
+end
+The_game.new
