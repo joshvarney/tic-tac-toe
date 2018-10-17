@@ -116,13 +116,27 @@ class End_game
     end
     column_group = column_group.each_slice(size).to_a 
     diagonal_group = diagonal_group.each_slice(size).to_a
-    row_group
-    diagonal_group
-    column_group
     winning_groups = row_group + diagonal_group + column_group
-    p winning_groups
-    return false
+    the_answer = winning_loop(winning_groups)
+    if the_answer == false
+      return false
+    else
+      return the_answer
+    end    
   end
+  def winning_loop(winning_groups)
+    game_time = false
+    winning_groups.each do |groups|
+      if groups.uniq.count == 1 && groups.uniq == ["X"]
+        game_time = "Player Wins"
+        break
+      elsif groups.uniq.count == 1 && groups.uniq == ["O"]
+        game_time = "Computer Wins"
+        break   
+      end
+    end
+    return game_time
+  end      
   attr_accessor :game_over
 end            
 class One_player
@@ -134,7 +148,7 @@ class One_player
   def play_game
     board_array = @board_array
     whatever = End_game.new(board_array).game_over
-    # system "cls"
+    system "cls"
 		puts " "
 		puts "Varney's TTT"
 		puts " "
