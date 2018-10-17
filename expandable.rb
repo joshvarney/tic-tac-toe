@@ -84,10 +84,9 @@ class End_game
   def check_winner
     size = Math.sqrt(@board_array.count).to_i
     smaller = size - 1
-    row_group = @board_array.each_slice(size).to_a
+    @row_group = @board_array.each_slice(size).to_a
     index_array = @board_array.map.with_index{ |x, i| i }
     column_group = []
-    column_group = column_group.each_slice(size).to_a
     diagonal_group = []
     counter = 0
     size.times do
@@ -114,9 +113,9 @@ class End_game
       end
       counter = size - 1
     end
-    column_group = column_group.each_slice(size).to_a 
-    diagonal_group = diagonal_group.each_slice(size).to_a
-    winning_groups = row_group + diagonal_group + column_group
+    @column_group = column_group.each_slice(size).to_a 
+    @diagonal_group = diagonal_group.each_slice(size).to_a
+    winning_groups = @row_group + @diagonal_group + @column_group
     the_answer = winning_loop(winning_groups)
     if the_answer == false
       return false
@@ -138,6 +137,9 @@ class End_game
     return game_time
   end      
   attr_accessor :game_over
+  attr_accessor :column_group
+  attr_accessor :diagonal_group
+  attr_accessor :row_group
 end            
 class One_player
   def initialize(grid, board_array)
