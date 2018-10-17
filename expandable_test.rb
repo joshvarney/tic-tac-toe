@@ -15,6 +15,7 @@ class Tic_tac_toe_test < Minitest::Test
   def test_that_player_can_make_move
     assert_equal(true, Human.new.board_array.include?("X"))
   end  
-  # def test_that_grid_populates_correctly_after_choice
-  #   assert_equal()
+  def test_that_grid_populates_correctly_after_choice
+    assert_equal()
+  end  
 end
