@@ -207,6 +207,8 @@ end
 class Computer
   def initialize(board_array)
     @board_array = board_array
+    build_middle_array
+    terminal_arrays
     player_moves
     computer_move
   end
@@ -219,8 +221,103 @@ class Computer
     end
     return @pmoves
   end
-  def computer_move
+  def build_middle_array
+    if @board_array.count.even? == true
+      size = Math.sqrt(@board_array.count).to_i
+      middle = @board_array.count / 2
+      here = size / 2
+      @middle_array = []
+      @middle_array << middle - here
+      @middle_array << middle - here - 1
+      @middle_array << middle + here 
+      @middle_array << middle + here - 1
+      @middle_array = @middle_array.shuffle!
+    end
+  end    
+  def terminal_arrays
+    size = Math.sqrt(@board_array.count).to_i
+    smaller = size - 1
+    row_group = @board_array.each_slice(size).to_a
+    index_array = @board_array.map.with_index{ |x, i| i }
+    column_group = []
+    column_group = column_group.each_slice(size).to_a
+    diagonal_group = []
     counter = 0
+    size.times do
+      column_group << @board_array[counter]
+      count = counter
+      smaller.times do
+        column_group << @board_array[count + size]
+        count = index_array[count + size]
+      end
+      counter += 1       
+    end
+    counter = 0
+    2.times do 
+      diagonal_group << @board_array[counter]
+      count = counter
+      smaller.times do
+        if counter == 0 
+          diagonal_group << @board_array[count + size + 1]
+          count = index_array[count + size + 1]
+        elsif counter == size - 1
+          diagonal_group << @board_array[count + size -1]
+          count = index_array[count + size - 1]
+        end
+      end
+      counter = size - 1
+    end
+    column_group = column_group.each_slice(size).to_a 
+    diagonal_group = diagonal_group.each_slice(size).to_a
+    @winning_groups = row_group + diagonal_group + column_group
+    @winning_groups
+  end  
+  def computer_move
+    size = Math.sqrt(@board_array.count).to_i
+    if @board_array.count.odd? == true
+      center = @board_array.count - 1
+      center = center / 2
+      if @board_array.include?(center)
+        @board_array[center] = "O"
+        return @board_array
+      end
+    end          
+    @winning_groups.each do |that|
+      if that.uniq.length == 2 && that.uniq[1].class == Integer
+        @board_array[that.uniq[1]] = "O"
+        return @board_array
+        break
+      elsif that.uniq.length == 2 && that.uniq[0].class == Integer
+        @board_array[that.uniq[0]] = "O"
+        return @board_array
+        break
+      end
+    end
+    @winning_groups.each do |that|
+      if that.uniq.length == 3 && that.uniq[0].class == Integer
+        @board_array[that.uniq[0]] = "O"
+        return @board_array
+        break
+      elsif that.uniq.length == 3 && that.uniq[1].class == Integer
+        @board_array[that.uniq[1]] = "O"
+        return @board_array
+        break
+      elsif that.uniq.length == 3 && that.uniq[2].class == Integer
+        @board_array[that.uniq[2]] = "O"
+        return @board_array
+        break  
+      end
+    end
+    if @board_array.count.even? == true
+        @middle_array.each do |cell|
+        if @board_array.include?(cell)
+          @board_array[cell] = "O"
+          return @board_array
+          break
+        end
+      end
+    end             
+    counter = 0 
     @board_array.each do |c|
       if c.class == Integer
         @board_array[counter] = "O"
@@ -228,7 +325,7 @@ class Computer
         break
       end
       counter += 1
-    end
+    end  
   end
   attr_reader :board_array
 end      
