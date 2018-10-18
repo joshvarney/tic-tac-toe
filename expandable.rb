@@ -237,12 +237,48 @@ class Computer
   end
   def player_moves
     @pmoves = []
+    @these_moves = []
+    size = Math.sqrt(@board_array.count).to_i
+    big_num = @board_array.count.to_i
     @board_array.each_with_index do |x, i|
       unless x != "X"
         @pmoves << i
+        first = i + 1
+        second = i - 1
+        third = i + size
+        fourth = i - size
+        fifth = i + size + 1
+        sixth = i + size - 1
+        seventh = i - size + 1
+        eighth = i - size - 1
+        if first >= 0 and first <= big_num
+          @these_moves << first
+        end
+        if second >= 0 and second <= big_num
+          @these_moves << second
+        end
+        if third >= 0 and third <= big_num
+          @these_moves << third
+        end
+        if fourth >= 0 and fourth <= big_num
+          @these_moves << fourth
+        end
+        if fifth >= 0 and fifth <= big_num
+          @these_moves << fifth
+        end
+        if sixth >= 0 and sixth <= big_num
+          @these_moves << sixth
+        end
+        if seventh >= 0 and seventh <= big_num
+          @these_moves << seventh
+        end
+        if eighth >= 0 and eighth <= big_num
+          @these_moves << eighth
+        end    
       end
     end
-    return @pmoves
+    @these_moves
+    @pmoves
   end
   def computer_move
     size = Math.sqrt(@board_array.count).to_i
@@ -288,8 +324,22 @@ class Computer
           break
         end
       end
-    end             
-    counter = 0 
+    end
+    @these_moves = @these_moves.shuffle!
+    @these_moves.each do |x|
+      if @board_array.include?(x) 
+        @board_array[x] = "O"
+        return @board_array
+      end
+    end      
+    # player_shuffle = @pmoves
+    # player_shuffle = player_shuffle.shuffle!
+    # these_moves = []
+    # player_shuffle.each do |x|
+
+    counter = 0
+    # shuffled = @board_array
+    # shuffled = shuffled.shuffle! 
     @board_array.each do |c|
       if c.class == Integer
         @board_array[counter] = "O"
