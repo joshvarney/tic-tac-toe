@@ -20,7 +20,7 @@ class Tic_tac_toe_test < Minitest::Test
   # end
   def test_that_end_game_class_is_building_everything_correct
     board_array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-    things = End_game.new(board_array)
+    things = Build_array.new(board_array)
     assert_equal(4, things.column_group.count)
     assert_equal(4, things.row_group.count)
     assert_equal(2, things.diagonal_group.count)     

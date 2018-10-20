@@ -251,28 +251,28 @@ class Computer
         sixth = i + size - 1
         seventh = i - size + 1
         eighth = i - size - 1
-        if first >= 0 and first <= big_num
+        if first >= 0 && first <= big_num
           @these_moves << first
         end
-        if second >= 0 and second <= big_num
+        if second >= 0 && second <= big_num
           @these_moves << second
         end
-        if third >= 0 and third <= big_num
+        if third >= 0 && third <= big_num
           @these_moves << third
         end
-        if fourth >= 0 and fourth <= big_num
+        if fourth >= 0 && fourth <= big_num
           @these_moves << fourth
         end
-        if fifth >= 0 and fifth <= big_num
+        if fifth >= 0 && fifth <= big_num
           @these_moves << fifth
         end
-        if sixth >= 0 and sixth <= big_num
+        if sixth >= 0 && sixth <= big_num
           @these_moves << sixth
         end
-        if seventh >= 0 and seventh <= big_num
+        if seventh >= 0 && seventh <= big_num
           @these_moves << seventh
         end
-        if eighth >= 0 and eighth <= big_num
+        if eighth >= 0 && eighth <= big_num
           @these_moves << eighth
         end    
       end
@@ -332,14 +332,7 @@ class Computer
         return @board_array
       end
     end      
-    # player_shuffle = @pmoves
-    # player_shuffle = player_shuffle.shuffle!
-    # these_moves = []
-    # player_shuffle.each do |x|
-
     counter = 0
-    # shuffled = @board_array
-    # shuffled = shuffled.shuffle! 
     @board_array.each do |c|
       if c.class == Integer
         @board_array[counter] = "O"
@@ -372,4 +365,4 @@ class The_game
     end    
   end
 end
-The_game.new
+# The_game.new
