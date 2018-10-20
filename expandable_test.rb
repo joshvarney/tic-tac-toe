@@ -62,5 +62,35 @@ class Tic_tac_toe_test < Minitest::Test
     assert_equal([20,21,22,23,24], things.row_group[4])
     assert_equal([0,6,12,18,24], things.diagonal_group[0])
     assert_equal([4,8,12,16,20], things.diagonal_group[1])
-  end    
+  end
+  def test_that_end_game_class_runs_correct
+    board_array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    assert_equal(false, End_game.new(board_array).game_over)
+    board_array = ["X","O","X","O","X","O","X","O","X","O","X","O","X","O","X","O"]
+    assert_equal("Tie", End_game.new(board_array).game_over)
+    
+    board_array = ["X","X","X","X",4,5,6,7,8,9,10,11,12,13,14,15]
+    assert_equal("Player Wins", End_game.new(board_array).game_over)
+    
+    board_array = [0,1,2,"X",4,5,6,"X",8,9,10,"X",12,13,14,"X"]
+    assert_equal("Player Wins", End_game.new(board_array).game_over)
+    
+    board_array = ["X",1,2,3,4,"X",6,7,8,9,"X",11,12,13,14,"X"]
+    assert_equal("Player Wins", End_game.new(board_array).game_over)
+    
+    board_array = [0,1,2,3,4,5,6,7,8,9,10,11,"X","X","X","X"]
+    assert_equal("Player Wins", End_game.new(board_array).game_over)
+    
+    board_array = [0,"O",2,3,4,"O",6,7,8,"O",10,11,12,"O",14,15]
+    assert_equal("Computer Wins", End_game.new(board_array).game_over)
+    
+    board_array = [0,1,2,3,"O","O","O","O",8,9,10,11,12,13,14,15]
+    assert_equal("Computer Wins", End_game.new(board_array).game_over)
+    
+    board_array = [0,1,2,"O",4,5,"O",7,8,"O",10,11,"O",13,14,15]
+    assert_equal("Computer Wins", End_game.new(board_array).game_over)
+    
+    board_array = [0,1,"O",3,4,5,"O",7,8,9,"O",11,12,13,"O",15]
+    assert_equal("Computer Wins", End_game.new(board_array).game_over)
+  end      
 end
