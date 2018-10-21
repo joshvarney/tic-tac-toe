@@ -43,6 +43,7 @@ class Tic_tac_toe_test < Minitest::Test
     assert_equal(true, things.middle_array.include?(6))
     assert_equal(false, things.middle_array.include?(4))
     assert_equal(false, things.middle_array.include?(11))
+    
     board_array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
     things = Build_array.new(board_array)
     assert_equal(5, things.column_group.count)
