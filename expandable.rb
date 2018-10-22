@@ -367,4 +367,4 @@ class The_game
     end    
   end
 end
-The_game.new
+# The_game.new
