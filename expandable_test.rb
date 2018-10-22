@@ -105,6 +105,10 @@ class Tic_tac_toe_test < Minitest::Test
     assert_equal([0,10,15], Computer.new(board_array).pmoves)
     assert_equal(17, Computer.new(board_array).these_moves.count)
     assert_equal("O", Computer.new(board_array).board_array[5])
-
+    
+    board_array = ["X",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+    assert_equal([0], Computer.new(board_array).pmoves)
+    assert_equal(4, Computer.new(board_array).these_moves.count)
+    assert_equal("O", Computer.new(board_array).board_array[12])
   end  
 end
