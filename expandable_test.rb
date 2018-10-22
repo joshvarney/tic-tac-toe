@@ -67,6 +67,7 @@ class Tic_tac_toe_test < Minitest::Test
   def test_that_end_game_class_runs_correct
     board_array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     assert_equal(false, End_game.new(board_array).game_over)
+    
     board_array = ["X","O","X","O","X","O","X","O","X","O","X","O","X","O","X","O"]
     assert_equal("Tie", End_game.new(board_array).game_over)
     
@@ -93,5 +94,11 @@ class Tic_tac_toe_test < Minitest::Test
     
     board_array = [0,1,"O",3,4,5,"O",7,8,9,"O",11,12,13,"O",15]
     assert_equal("Computer Wins", End_game.new(board_array).game_over)
-  end      
+  end
+  def test_that_computer_moves_class_is_making_correct_moves
+    board_array = ["X",1,2,3,4,5,6,7,8,"X",10,11,12,13,14,15]
+    assert_equal([1,4,5,3,10,8,13,5,14,12,6,4], Computer.new(board_array).these_moves)
+    assert_equal([0,9], Computer.new(board_array).pmoves)
+    assert_equal(true, Computer.new(board_array).board_array.include?("O"))
+  end  
 end

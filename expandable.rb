@@ -342,6 +342,8 @@ class Computer
       counter += 1
     end  
   end
+  attr_accessor :these_moves
+  attr_accessor :pmoves
   attr_reader :board_array
 end      
 class The_game
@@ -365,4 +367,4 @@ class The_game
     end    
   end
 end
-# The_game.new
+The_game.new
