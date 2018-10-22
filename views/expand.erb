@@ -4,9 +4,9 @@
 			<h1>Varney's Tic Tac Toe</h1>
 		</div>
     <div class="screen">
-      <%=size%><br>
-      <%=the_end%><br>
-      <%=board_array%><br>
+      <%if the_end != false%>
+      <h2><%=the_end%></h2>
+      <%end%>
       <form method="post" action="expand">
         <% counter = 0 %>
         <table class="table_3">
@@ -15,14 +15,14 @@
           <%size.times do%>
           <td class="td_3">
             <%if board_array[counter].class == String%>
-              <%=board_array[counter]%>
+              <div class="board_letter"><%=board_array[counter]%></div>
             <%else%>
               <%if the_end != false%>
                 <a>&nbsp;</a>
               <%else%>  
                 <form method="post" action="expand"> 
                   <input hidden type="text" name="choice" value="<%=board_array[counter]%>">
-                  <input type="submit" value="<%=board_array[counter]%>">
+                  <input class="expbutton" type="submit" value="<%=board_array[counter]%>">
                 </form>
               <%end%>  
             <%end%>    

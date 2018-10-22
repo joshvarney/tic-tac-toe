@@ -275,3 +275,22 @@ input[id="expandable"]:checked ~ .reveal_if_active3 {
   border: 8px solid black;
   padding-top: 10%;
 }
+.expbutton {
+  opacity: 0 !important;
+  margin-bottom: -6px;
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  padding-top: 5px;
+
+}
+.table_3, .th_3, .td_3 {
+  margin: auto;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+  text-align: center;
+}
+.board_letter {
+  padding: 9px;
+  font-size: 100%;
+}
