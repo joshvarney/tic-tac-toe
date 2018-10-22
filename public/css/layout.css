@@ -212,3 +212,55 @@ input[id="two_player"]:checked ~ .reveal_if_active {
   border: 8px solid black;
   padding-top: 3%;
 }
+.reveal_if_active2 {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+input[class="regular"]:checked ~ .reveal_if_active2 {
+  opacity: 1;
+  max-height: 100px;
+  overflow: visible;
+}
+
+.reveal_if_active2 {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: 0.5s;
+  input[class="regular"]:checked ~ & {
+    opacity: 1;
+    max-height: 100px;
+    overflow: visible;
+    padding: 10px 20px;
+    transform: scale(1);
+  }
+}
+.reveal_if_active3 {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+input[id="expandable"]:checked ~ .reveal_if_active3 {
+  opacity: 1;
+  max-height: 100px;
+  overflow: visible;
+}
+
+.reveal_if_active3 {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: 0.5s;
+  input[id="expandable"]:checked ~ & {
+    opacity: 1;
+    max-height: 100px;
+    overflow: visible;
+    padding: 10px 20px;
+    transform: scale(1);
+  }
+}

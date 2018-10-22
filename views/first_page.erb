@@ -9,15 +9,40 @@
 			<div class="container">
 				<form method="post" action="game">
 				<div class="radios">
-					<input type="radio" name="skill" value=1> Easy<br><br>
-					<input type="radio" name="skill" value=2> Medium<br><br>
-					<input type="radio"	name="skill" value=3 checked> Unbeatable<br>
-					<br><hr><br>
-					<input type="radio" name="marker" value="X" checked> Go First<br><br>
-					<input type="radio" name="marker" value="O"> CPU goes First<br><br>
+					<input class="regular" type="radio" name="skill" value=1> Easy<br><br>
+					<input class="regular" type="radio" name="skill" value=2> Medium<br><br>
+					<input class="regular" type="radio"	name="skill" value=3 checked> Unbeatable<br><br>
+					<input id="expandable" type="radio" name="skill" value=4> Expandable
+					<br><hr>
+					<div class="reveal_if_active2">
+						<input required class="require_if_active3" type="radio" name="marker" value="X" checked> Go First<br><br>
+						<input class="require_if_active3" type="radio" name="marker" value="O"> CPU goes First<br><br>
+					</div>
+					<div class="reveal_if_active3">
+						<a>Enter Board Size</a><br><br>
+						<input disabled class="require_if_active2" type="number" name="size" pattern="[0-9]+" title="Number 4-31" min="4" max="31"><br><br>
 				</div>	
 					<br><input class="button2" type="submit" value="Play Game">
 				</form>
 			</div>		
 	</body>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+	        $(".regular").click(function() {
+	            $(".require_if_active3").prop("required", true);
+	            $(".require_if_active3").prop("disabled", false);  
+	        });
+	        $("#expandable").click(function() {
+	            $(".require_if_active3").prop("required", false);
+	            $(".require_if_active3").prop("disabled", true);  
+	        });
+					 $("#expandable").click(function() {
+	            $(".require_if_active2").prop("required", true);
+	            $(".require_if_active2").prop("disabled", false);  
+	        });
+	        $(".regular").click(function() {
+	            $(".require_if_active2").prop("required", false);
+	            $(".require_if_active2").prop("disabled", true);  
+	        });
+		</script>			
 </html>

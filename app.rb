@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'mysql2'
 require_relative 'tic_tac_toe.rb'
+require_relative 'expand.rb'
 enable :sessions
 load 'local_ENV.rb' if File.exist?('local_ENV.rb')
 client = Mysql2::Client.new(:username => ENV['RDS_USERNAME'], :password => ENV['RDS_PASSWORD'], :host => ENV['RDS_HOSTNAME'], :port => ENV['RDS_PORT'], :database => ENV['RDS_DB_NAME'], :socket => '/tmp/mysql.sock')
@@ -94,12 +95,26 @@ get '/game' do
 end
 post '/game' do
 	skill = params[:skill]
+	size = params[:size]
 	marker = params[:marker]
 	session[:skill] = skill.to_i
+	session[:size] = size.to_i
 	session[:marker] = marker
-	erb :first_page, locals:{user1: session[:user1], board: session[:board], marker: session[:marker], skill: session[:skill]}
-	redirect '/ttt'
+	erb :first_page, locals:{user1: session[:user1], board: session[:board], marker: session[:marker], skill: session[:skill], size: session[:size]}
+	if skill == "4"
+		redirect '/expand'
+	else	
+		redirect '/ttt'
+	end	
 end
+get '/expand' do
+	size = session[:size]
+	board_array = Array.new(size * size).map.with_index{ |x, i| i }  
+	erb :expand, locals:{size: session[:size], board_array: board_array}
+end
+post '/expand' do
+
+end		
 get '/ttt' do
 	if session[:skill] == 0
 		session[:marker] = "X"
