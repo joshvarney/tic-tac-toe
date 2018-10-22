@@ -181,4 +181,4 @@ class Hard_cpu
 		end			
 	end	
 	attr_reader :move
-end		
+end	

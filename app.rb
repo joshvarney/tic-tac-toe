@@ -71,7 +71,6 @@ post '/create_account' do
 		user_info << row['user']
 	end
 	user_info.each do |stuff|
-		p stuff
 		if user == stuff
 			session[:error] = "User Name Taken"
 			redirect '/create_account'
@@ -87,7 +86,7 @@ post '/create_account' do
   		VALUES('#{user}', '#{pass}')")
    		session[:error] = "Account Created"
    		redirect '/'
-   	end	
+  end	
 end
 get '/game' do
 	session[:board] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -98,10 +97,10 @@ post '/game' do
 	size = params[:size]
 	marker = params[:marker]
 	session[:skill] = skill.to_i
-	session[:size] = size.to_i
 	session[:marker] = marker
 	erb :first_page, locals:{user1: session[:user1], board: session[:board], marker: session[:marker], skill: session[:skill], size: session[:size]}
 	if skill == "4"
+		session[:size] = size.to_i
 		redirect '/expand'
 	else	
 		redirect '/ttt'
@@ -109,11 +108,26 @@ post '/game' do
 end
 get '/expand' do
 	size = session[:size]
-	board_array = Array.new(size * size).map.with_index{ |x, i| i }  
-	erb :expand, locals:{size: session[:size], board_array: board_array}
+	board_array = Array.new(size * size).map.with_index{ |x, i| i }
+	session[:board_array] = board_array
+	session[:the_end] = false
+	erb :expand, locals:{size: session[:size], board_array: session[:board_array], the_end: session[:the_end], skill: session[:skill]}
 end
 post '/expand' do
-
+	board_array = session[:board_array]
+	choice = params[:choice]
+	p choice
+	p board_array
+	board_array[choice.to_i] = "X"
+	p board_array
+	the_end = End_game.new(board_array).game_over
+	if the_end == false
+		board_array = Computer.new(board_array).board_array
+		the_end = End_game.new(board_array).game_over
+	end
+	session[:board_array] = board_array
+	session[:the_end] = the_end
+	erb :expand, locals:{board_array: session[:board_array], the_end: session[:the_end], skill: session[:skill], size: session[:size]}	
 end		
 get '/ttt' do
 	if session[:skill] == 0

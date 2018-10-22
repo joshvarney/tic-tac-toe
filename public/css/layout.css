@@ -264,3 +264,14 @@ input[id="expandable"]:checked ~ .reveal_if_active3 {
     transform: scale(1);
   }
 }
+.screen {
+  background-color: black;
+  opacity: .8;
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0%;
+  border: 8px solid black;
+  padding-top: 10%;
+}

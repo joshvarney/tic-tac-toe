@@ -1,6 +1,48 @@
 <html>
   <body>
-    <%=size%>
-    <%=board_array%>
+    <div class="head">
+			<h1>Varney's Tic Tac Toe</h1>
+		</div>
+    <div class="screen">
+      <%=size%><br>
+      <%=the_end%><br>
+      <%=board_array%><br>
+      <form method="post" action="expand">
+        <% counter = 0 %>
+        <table class="table_3">
+        <%size.times do%>
+        <tr class="tr_3">
+          <%size.times do%>
+          <td class="td_3">
+            <%if board_array[counter].class == String%>
+              <%=board_array[counter]%>
+            <%else%>
+              <%if the_end != false%>
+                <a>&nbsp;</a>
+              <%else%>  
+                <form method="post" action="expand"> 
+                  <input hidden type="text" name="choice" value="<%=board_array[counter]%>">
+                  <input type="submit" value="<%=board_array[counter]%>">
+                </form>
+              <%end%>  
+            <%end%>    
+          </td>
+          <%counter += 1%>
+          <%end%>
+        </tr>
+        <%end%>  
+        </table>
+      </form>
+      <%if the_end != false%>	
+        <div class="game_over_buttons">
+          <br><a href="/expand"><input class="button2" type="button" value="Play Again"></a>
+          <a href="/stats"><input class="button2" type="button" value="Stats"></a>
+          <a href="/"><input class="button2" type="button" value="Log Out"></a>
+          <%if skill > 0%> 
+            <br><a href="/game"><input class="button2" type="button" value="Change Difficulty"></a>
+          <%end%>	
+        </div>
+      <%end%>
+    </div>	
   </body>
 </html>    
