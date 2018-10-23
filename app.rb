@@ -111,15 +111,12 @@ get '/expand' do
 	board_array = Array.new(size * size).map.with_index{ |x, i| i }
 	session[:board_array] = board_array
 	session[:the_end] = false
-	erb :expand, locals:{size: session[:size], board_array: session[:board_array], the_end: session[:the_end], skill: session[:skill]}
+	erb :expand, locals:{size: session[:size], board_array: session[:board_array], the_end: session[:the_end], skill: session[:skill], user1: session[:user1]}
 end
 post '/expand' do
 	board_array = session[:board_array]
 	choice = params[:choice]
-	p choice
-	p board_array
 	board_array[choice.to_i] = "X"
-	p board_array
 	the_end = End_game.new(board_array).game_over
 	if the_end == false
 		board_array = Computer.new(board_array).board_array
@@ -127,7 +124,46 @@ post '/expand' do
 	end
 	session[:board_array] = board_array
 	session[:the_end] = the_end
-	erb :expand, locals:{board_array: session[:board_array], the_end: session[:the_end], skill: session[:skill], size: session[:size]}	
+	case session[:the_end]
+		when "Player Wins"
+			session[:the_end] = "session[:user1] is the Winner"
+			expand_win = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user1]}'")
+			expand_win_array = []
+			expand_win.each do |row|
+				expand_win_array << [[row['expd wins']], [row['expd games']], [row['total games']]]
+			end
+			win = expand_win_array[0][0][0].to_i + 1
+			games = expand_win_array[0][1][0].to_i + 1
+			tgames = expand_win_array[0][2][0].to_i + 1
+			client.query("UPDATE `ttt_table` SET `expd wins`='#{win}' WHERE `user`='#{session[:user1]}'")
+			client.query("UPDATE `ttt_table` SET `expd games`='#{games}' WHERE `user`='#{session[:user1]}'")
+			client.query("UPDATE `ttt_table` SET `total games`='#{tgames}' WHERE `user`='#{session[:user1]}'")
+		when "Computer Wins"
+			expand_loss = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user1]}'")
+			expand_loss_array = []
+			expand_loss.each do |row|
+				expand_loss_array << [[row['expd loss']], [row['expd games']], [row['total games']]]
+			end
+			loss = expand_loss_array[0][0][0].to_i + 1
+			games = expand_loss_array[0][1][0].to_i + 1
+			tgames = expand_loss_array[0][2][0].to_i + 1
+			client.query("UPDATE `ttt_table` SET `expd loss`='#{loss}' WHERE `user`='#{session[:user1]}'")
+			client.query("UPDATE `ttt_table` SET `expd games`='#{games}' WHERE `user`='#{session[:user1]}'")
+			client.query("UPDATE `ttt_table` SET `total games`='#{tgames}' WHERE `user`='#{session[:user1]}'")
+		when	"Tie"
+			expand_tie = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user1]}'")
+			expand_tie_array = []
+			expand_tie.each do |row|
+				expand_tie_array << [[row['expd ties']], [row['expd games']], [row['total games']]]
+			end
+			ties = expand_tie_array[0][0][0].to_i + 1
+			games = expand_tie_array[0][1][0].to_i + 1
+			tgames = expand_tie_array[0][2][0].to_i + 1
+			client.query("UPDATE `ttt_table` SET `expd ties`='#{ties}' WHERE `user`='#{session[:user1]}'")
+			client.query("UPDATE `ttt_table` SET `expd games`='#{games}' WHERE `user`='#{session[:user1]}'")
+			client.query("UPDATE `ttt_table` SET `total games`='#{tgames}' WHERE `user`='#{session[:user1]}'")
+	end
+	erb :expand, locals:{board_array: session[:board_array], the_end: session[:the_end], skill: session[:skill], size: session[:size], user1: session[:user1]}	
 end		
 get '/ttt' do
 	if session[:skill] == 0
@@ -197,51 +233,7 @@ post '/ttt' do
 				end
 				case counter.even?
 					when true then game_array[10] = "#{session[:user2]} is the"
-						user2_win = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user2]}'")
-						user2_win_array = []
-						user2_win.each do |row|
-							user2_win_array << [[row['pvp wins']], [row['pvp games']], [row['total games']]]
-						end
-						win_user2 = user2_win_array[0][0][0].to_i + 1
-						games_user2 = user2_win_array[0][1][0].to_i + 1
-						tgames_user2 = user2_win_array[0][2][0].to_i + 1
-			  			client.query("UPDATE `ttt_table` SET `pvp wins`='#{win_user2}' WHERE `user`='#{session[:user2]}'")
-						client.query("UPDATE `ttt_table` SET `pvp games`='#{games_user2}' WHERE `user`='#{session[:user2]}'")
-						client.query("UPDATE `ttt_table` SET `total games`='#{tgames_user2}' WHERE `user`='#{session[:user2]}'")
-						user1_loss = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user1]}'")
-						user1_loss_array = []
-						user1_loss.each do |row|
-							user1_loss_array << [[row['pvp loss']], [row['pvp games']], [row['total games']]]
-						end
-						loss_user1 = user1_loss_array[0][0][0].to_i + 1
-						games_user1 = user1_loss_array[0][1][0].to_i + 1
-						tgames_user1 = user1_loss_array[0][2][0].to_i + 1
-			  			client.query("UPDATE `ttt_table` SET `pvp loss`='#{loss_user1}' WHERE `user`='#{session[:user1]}'")
-						client.query("UPDATE `ttt_table` SET `pvp games`='#{games_user1}' WHERE `user`='#{session[:user1]}'")
-						client.query("UPDATE `ttt_table` SET `total games`='#{tgames_user1}' WHERE `user`='#{session[:user1]}'") 
 					when false then game_array[10] = "#{session[:user1]} is the"
-						user1_win = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user1]}'")
-						user1_win_array = []
-						user1_win.each do |row|
-							user1_win_array << [[row['pvp wins']], [row['pvp games']], [row['total games']]]
-						end
-						win_user1 = user1_win_array[0][0][0].to_i + 1
-						games_user1 = user1_win_array[0][1][0].to_i + 1
-						tgames_user1 = user1_win_array[0][2][0].to_i + 1
-			  			client.query("UPDATE `ttt_table` SET `pvp wins`='#{wins_user1}' WHERE `user`='#{session[:user1]}'")
-						client.query("UPDATE `ttt_table` SET `pvp games`='#{games_user1}' WHERE `user`='#{session[:user1]}'")
-						client.query("UPDATE `ttt_table` SET `total games`='#{tgames_user1}' WHERE `user`='#{session[:user1]}'")
-						user2_loss = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user2]}'")
-						user2_loss_array = []
-						user2_loss.each do |row|
-							user2_loss_array << [[row['pvp loss']], [row['pvp games']], [row['total games']]]
-						end
-						loss_user2 = user2_loss_array[0][0][0].to_i + 1
-						games_user2 = user2_loss_array[0][1][0].to_i + 1
-						tgames_user2 = user2_loss_array[0][2][0].to_i + 1
-			  			client.query("UPDATE `ttt_table` SET `pvp loss`='#{loss_user2}' WHERE `user`='#{session[:user2]}'")
-						client.query("UPDATE `ttt_table` SET `pvp games`='#{games_user2}' WHERE `user`='#{session[:user2]}'")
-						client.query("UPDATE `ttt_table` SET `total games`='#{tgames_user2}' WHERE `user`='#{session[:user2]}'")
 				end	
 			end
 			counter = 0
@@ -251,28 +243,6 @@ post '/ttt' do
 				end
 			end
 			if counter == 9 && game_array.count == 9
-				user1_tie = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user1]}'")
-				user1_tie_array = []
-				user1_tie.each do |row|
-					user1_tie_array << [[row['pvp ties']], [row['pvp games']], [row['total games']]]
-				end
-				tie_user1 = user1_tie_array[0][0][0].to_i + 1
-				games_user1 = user1_tie_array[0][1][0].to_i + 1
-				tgames_user1 = user1_tie_array[0][2][0].to_i + 1
-	 			client.query("UPDATE `ttt_table` SET `pvp ties`='#{tie_user1}' WHERE `user`='#{session[:user1]}'")
-				client.query("UPDATE `ttt_table` SET `pvp games`='#{games_user1}' WHERE `user`='#{session[:user1]}'")
-				client.query("UPDATE `ttt_table` SET `total games`='#{tgames_user1}' WHERE `user`='#{session[:user1]}'")
-				user2_tie = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user2]}'")
-				user2_tie_array = []
-				user2_tie.each do |row|
-					user2_tie_array << [[row['pvp ties']], [row['pvp games']], [row['total games']]]
-				end
-				tie_user2 = user2_tie_array[0][0][0].to_i + 1
-				games_user2 = user2_tie_array[0][1][0].to_i + 1
-				tgames_user2 = user2_tie_array[0][2][0].to_i + 1
-				client.query("UPDATE `ttt_table` SET `pvp ties`='#{tie_user2}' WHERE `user`='#{session[:user2]}'")
-				client.query("UPDATE `ttt_table` SET `pvp games`='#{games_user2}' WHERE `user`='#{session[:user2]}'")
-				client.query("UPDATE `ttt_table` SET `total games`='#{tgames_user2}' WHERE `user`='#{session[:user2]}'")
 				game_array[9] = "Its a Tie"
 			end	
 		when 1,2,3 then game_array = Winning.new(session[:board]).check_win
@@ -341,7 +311,7 @@ get '/stats' do
 	results = client.query("SELECT * FROM ttt_table")
 	results_table = []
 	results.each do |row|
-		results_table << [[row['user']], [row['pvp wins']], [row['pvp loss']], [row['pvp ties']], [row['pvp games']], [row['hard wins']], [row['hard loss']], [row['hard ties']], [row['hard games']], [row['total games']]]
+		results_table << [[row['user']], [row['expd wins']], [row['expd loss']], [row['expd ties']], [row['expd games']], [row['hard wins']], [row['hard loss']], [row['hard ties']], [row['hard games']], [row['total games']]]
 	end
 	session[:results_table] = results_table
 	erb :stats, locals:{user1: session[:user1], user2: session[:user2], results_table: session[:results_table]}
