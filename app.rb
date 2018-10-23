@@ -71,7 +71,7 @@ post '/create_account' do
 		user_info << row['user']
 	end
 	user_info.each do |stuff|
-		if user == stuff
+		if user.downcase == stuff.downcase
 			session[:error] = "User Name Taken"
 			redirect '/create_account'
 		end
