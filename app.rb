@@ -107,6 +107,7 @@ post '/game' do
 	end	
 end
 get '/expand' do
+	user1 = session[:user1]
 	size = session[:size]
 	board_array = Array.new(size * size).map.with_index{ |x, i| i }
 	session[:board_array] = board_array
@@ -126,7 +127,8 @@ post '/expand' do
 	session[:the_end] = the_end
 	case session[:the_end]
 		when "Player Wins"
-			session[:the_end] = "session[:user1] is the Winner"
+			user1 = session[:user1]
+			session[:the_end] = "#{user1} is the Winner"
 			expand_win = client.query("SELECT * FROM ttt_table WHERE `user` = '#{session[:user1]}'")
 			expand_win_array = []
 			expand_win.each do |row|
