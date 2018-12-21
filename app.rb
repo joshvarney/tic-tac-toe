@@ -1,7 +1,6 @@
 require 'sinatra'
 require_relative 'tic_tac_toe.rb'
 require_relative 'expand.rb'
-load 'local_ENV.rb' if File.exist?('local_ENV.rb')
 enable :sessions
 
 get '/' do
@@ -47,7 +46,6 @@ post '/expand' do
 		when "Player Wins"
 			user1 = session[:user1]
 			session[:the_end] = "#{user1} is the Winner"
-			end
 		when "Computer Wins"
 			session[:the_end] = "The Computer is the Winner"
 		when	"Tie"
